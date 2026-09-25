@@ -66,7 +66,7 @@ input,select{font-family:var(--font-body);}
 </nav>
 
 <header id="top" style="max-width:1280px;margin:0 auto;padding:76px 40px 0">
-  <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:56px;align-items:start">
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:56px;align-items:start">
     <div>
       <div style="font-family:var(--font-heading);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-accent);margin-bottom:26px">Together since spring 2020 · Invitation only</div>
       <h1 style="font-family:var(--font-heading);color:#000000;font-size:62px;font-weight:700;line-height:1.02;letter-spacing:-.022em;margin:0 0 26px;max-width:16ch;text-wrap:balance">A thought leadership community of accomplished business leaders.</h1>
@@ -87,14 +87,14 @@ input,select{font-family:var(--font-body);}
           <div><strong style="font-weight:700;color:var(--color-text)">12 PM</strong> Central</div>
           <div><strong style="font-weight:700;color:var(--color-text)">1 PM</strong> Eastern</div>
         </div>
-        <a class="btn btn-primary btn-block" href="https://zoom.us/j/4065516269#success" target="_blank" rel="noopener" style="text-decoration:none;margin-top:20px">Join the meeting</a>
+        <a class="btn btn-primary" href="https://zoom.us/j/4065516269#success" target="_blank" rel="noopener" style="text-decoration:none;margin-top:20px">Join the meeting</a>
       </div>
     </div>
 
     <div id="sparks" style="border:1px solid var(--color-neutral-300);padding:24px 26px 22px">
       <img src="assets/MAGIC-Sparks-Header.png" alt="MAGiC Sparks" style="width:100%;max-width:300px;height:auto;display:block;margin-bottom:14px">
       <p style="font-size:14px;line-height:1.55;color:var(--color-accent-2-700);margin:0 0 16px">Our weekly newsletter: what happened Friday, what's coming next, and the ideas worth passing on.</p>
-      <a class="btn btn-primary btn-block" href="https://mailchi.mp/redroostergroup/magic" target="_blank" rel="noopener" style="text-decoration:none">Subscribe to MAGiC Sparks ↗</a>
+      <a class="btn btn-primary" href="https://mailchi.mp/redroostergroup/magic" target="_blank" rel="noopener" style="text-decoration:none;margin-top:8px">Subscribe to MAGiC Sparks ↗</a>
     </div>
     </div>
   </div>
@@ -126,10 +126,10 @@ input,select{font-family:var(--font-body);}
   <sc-if value="{{ hasNext }}" hint-placeholder-val="{{ true }}">
     <article style="border:1px solid var(--color-neutral-300);display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);margin-bottom:34px">
       <div style="background:var(--color-accent);color:#ffffff;padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between">
-        <div style="font-family:var(--font-heading);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Next session</div>
+        <div style="font-family:var(--font-heading);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Next session</div>
         <div>
           <div style="font-family:var(--font-heading);font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-top:26px">{{ next.dow }}</div>
-          <div style="font-family:var(--font-heading);color:#000000;font-size:58px;font-weight:700;line-height:1;margin:2px 0">{{ next.day }}</div>
+          <div style="font-family:var(--font-heading);font-size:58px;font-weight:700;line-height:1;margin:2px 0">{{ next.day }}</div>
           <div style="font-family:var(--font-heading);font-size:17px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">{{ next.moyr }}</div>
         </div>
       </div>
