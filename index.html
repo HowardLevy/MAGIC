@@ -284,7 +284,7 @@ input,select{font-family:var(--font-body);}
             </sc-if>
           </div>
         </div>
-        <p style="font-size:14px;line-height:1.55;color:var(--color-accent-2-700);margin:0;flex:1"><sc-for list="{{ m.sParts }}" as="sp"><sc-if value="{{ sp.url }}"><a href="{{ sp.url }}" target="_blank" rel="noopener">{{ sp.t }}</a></sc-if><sc-if value="{{ sp.mail }}"><a href="{{ sp.mail }}">{{ sp.t }}</a></sc-if><sc-if value="{{ sp.plain }}"><span>{{ sp.t }}</span></sc-if></sc-for></p>
+        <p style="font-size:14px;line-height:1.55;color:var(--color-accent-2-700);margin:0;flex:1">{{ m.s }}</p>
         <div style="display:flex;gap:6px;flex-wrap:wrap">
           <sc-for list="{{ m.tags }}" as="tg" hint-placeholder-count="2">
             <span class="tag tag-outline" style="border-radius:999px;padding-left:12px;padding-right:12px">{{ tg }}</span>
@@ -556,19 +556,17 @@ const nameOf = v => {
   return u ? u.replace(/^https?:\/\/(www\.)?/i, "").replace(/\/.*$/, "") : "";
 };
 const titled = v => (v || "").replace(/\b[a-z][a-z'\u2019-]*/g, w => w[0].toUpperCase() + w.slice(1));
-// Split free text into plain runs and clickable emails / web addresses.
+// Pull web addresses and emails out of a bio so they show as the card's
+// Website / LinkedIn / Email links instead of inline text.
 const LINK_RE = new RegExp("([a-z0-9._%+-]+@[a-z0-9-]+(?:\\.[a-z0-9-]+)*\\.[a-z]{2,})|(" + URL_SRC + ")(?![a-z0-9-])", "gi");
-const linkify = v => {
-  const out = [], text = v || "";
-  let at = 0;
-  for (const m of text.matchAll(LINK_RE)) {
-    const t = m[0].replace(/[.!?:'"]+$/, "");
-    if (m.index > at) out.push({ t: text.slice(at, m.index), plain: true });
-    out.push(m[1] ? { t, mail: "mailto:" + t } : { t, url: httpish(t) });
-    at = m.index + t.length;
-  }
-  if (at < text.length) out.push({ t: text.slice(at), plain: true });
-  return out;
+const splitBio = v => {
+  const urls = [], emails = [];
+  const text = (v || "").replace(LINK_RE, (m, mail) => {
+    const t = m.replace(/[.!?:'"]+$/, "");
+    (mail ? emails : urls).push(mail ? t : httpish(t));
+    return m.slice(t.length);
+  }).replace(/\s+([.,;:!?])/g, "$1").replace(/[\s,;:\u2013\u2014-]+$/, "").replace(/\s{2,}/g, " ").trim();
+  return { text, urls, emails };
 };
 const linkedin = v => { const s = (v || "").trim(); return /linkedin\.com/i.test(s) ? httpish(s) : ""; };
 
@@ -779,18 +777,25 @@ class Component extends DCLogic {
       if (S.st && m.st !== S.st) return false;
       if (!q) return true;
       return (m.n + " " + m.co + " " + m.s + " " + m.city + " " + m.st + " " + (m.tags || []).join(" ")).toLowerCase().includes(q);
-    }).map(m => ({
-      ...m,
-      co: m.co || "",
-      coHref: m.co && m.w ? m.w : "",
-      coPlain: m.co && !m.w,
-      place: [m.city, m.st].filter(Boolean).join(", "),
-      s: m.s || "",
-      sParts: linkify(m.s),
-      tags: m.tags || [],
-      mailto: (m.e && (this.props.showMemberEmails ?? true)) ? "mailto:" + m.e : "",
-      e: (this.props.showMemberEmails ?? true) ? m.e : ""
-    }));
+    }).map(m => {
+      const bio = splitBio(m.s);
+      const w = m.w || bio.urls.find(u => !/linkedin\.com/i.test(u)) || "";
+      const li = m.li || bio.urls.find(u => /linkedin\.com/i.test(u)) || "";
+      const e = m.e || bio.emails[0] || "";
+      const showE = this.props.showMemberEmails ?? true;
+      return {
+        ...m,
+        w, li,
+        co: m.co || "",
+        coHref: m.co && w ? w : "",
+        coPlain: m.co && !w,
+        place: [m.city, m.st].filter(Boolean).join(", "),
+        s: bio.text,
+        tags: m.tags || [],
+        mailto: (e && showE) ? "mailto:" + e : "",
+        e: showE ? e : ""
+      };
+    });
 
     const expand = s => ({
       ...s,
