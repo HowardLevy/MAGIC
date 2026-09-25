@@ -273,7 +273,10 @@ input,select{font-family:var(--font-body);}
         <div>
           <div style="font-family:var(--font-heading);font-size:20px;font-weight:700;line-height:1.2;color:#000000">{{ m.n }}</div>
           <div style="font-size:13px;color:var(--color-accent-2);margin-top:4px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline">
-            <sc-if value="{{ m.co }}" hint-placeholder-val="{{ true }}">
+            <sc-if value="{{ m.coHref }}" hint-placeholder-val="{{ true }}">
+              <a href="{{ m.coHref }}" target="_blank" rel="noopener" style="font-weight:600;color:var(--color-accent-2-700)">{{ m.co }}</a>
+            </sc-if>
+            <sc-if value="{{ m.coPlain }}">
               <span style="font-weight:600;color:var(--color-accent-2-700)">{{ m.co }}</span>
             </sc-if>
             <sc-if value="{{ m.place }}" hint-placeholder-val="{{ true }}">
@@ -281,7 +284,7 @@ input,select{font-family:var(--font-body);}
             </sc-if>
           </div>
         </div>
-        <p style="font-size:14px;line-height:1.55;color:var(--color-accent-2-700);margin:0;flex:1">{{ m.s }}</p>
+        <p style="font-size:14px;line-height:1.55;color:var(--color-accent-2-700);margin:0;flex:1"><sc-for list="{{ m.sParts }}" as="sp"><sc-if value="{{ sp.url }}"><a href="{{ sp.url }}" target="_blank" rel="noopener">{{ sp.t }}</a></sc-if><sc-if value="{{ sp.mail }}"><a href="{{ sp.mail }}">{{ sp.t }}</a></sc-if><sc-if value="{{ sp.plain }}"><span>{{ sp.t }}</span></sc-if></sc-for></p>
         <div style="display:flex;gap:6px;flex-wrap:wrap">
           <sc-for list="{{ m.tags }}" as="tg" hint-placeholder-count="2">
             <span class="tag tag-outline" style="border-radius:999px;padding-left:12px;padding-right:12px">{{ tg }}</span>
@@ -553,6 +556,20 @@ const nameOf = v => {
   return u ? u.replace(/^https?:\/\/(www\.)?/i, "").replace(/\/.*$/, "") : "";
 };
 const titled = v => (v || "").replace(/\b[a-z][a-z'\u2019-]*/g, w => w[0].toUpperCase() + w.slice(1));
+// Split free text into plain runs and clickable emails / web addresses.
+const LINK_RE = new RegExp("([a-z0-9._%+-]+@[a-z0-9-]+(?:\\.[a-z0-9-]+)*\\.[a-z]{2,})|(" + URL_SRC + ")(?![a-z0-9-])", "gi");
+const linkify = v => {
+  const out = [], text = v || "";
+  let at = 0;
+  for (const m of text.matchAll(LINK_RE)) {
+    const t = m[0].replace(/[.!?:'"]+$/, "");
+    if (m.index > at) out.push({ t: text.slice(at, m.index), plain: true });
+    out.push(m[1] ? { t, mail: "mailto:" + t } : { t, url: httpish(t) });
+    at = m.index + t.length;
+  }
+  if (at < text.length) out.push({ t: text.slice(at), plain: true });
+  return out;
+};
 const linkedin = v => { const s = (v || "").trim(); return /linkedin\.com/i.test(s) ? httpish(s) : ""; };
 
 function sessionsFrom(text) {
@@ -765,8 +782,11 @@ class Component extends DCLogic {
     }).map(m => ({
       ...m,
       co: m.co || "",
-      place: [m.city, m.st].filter(Boolean).join(", ") || (m.co ? "" : "MAGiC member"),
-      s: m.s || "Profile details coming soon.",
+      coHref: m.co && m.w ? m.w : "",
+      coPlain: m.co && !m.w,
+      place: [m.city, m.st].filter(Boolean).join(", "),
+      s: m.s || "",
+      sParts: linkify(m.s),
       tags: m.tags || [],
       mailto: (m.e && (this.props.showMemberEmails ?? true)) ? "mailto:" + m.e : "",
       e: (this.props.showMemberEmails ?? true) ? m.e : ""
