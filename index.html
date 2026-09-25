@@ -150,7 +150,7 @@ input,select{font-family:var(--font-body);}
         <button type="button" onClick="{{ s.toggle }}" style="text-align:left;background:#ffffff;border:0;padding:20px 20px 20px 4px;cursor:pointer;font-family:var(--font-body);display:grid;grid-template-columns:150px minmax(0,1fr) 26px;gap:26px;align-items:baseline;width:100%" style-hover="background:var(--color-accent-100)">
           <span style="font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:.02em;color:var(--color-accent-2)">{{ s.short }}</span>
           <span>
-            <span style="display:block;font-family:var(--font-heading);font-size:22px;font-weight:700;line-height:1.25;color:var(--color-text);text-wrap:pretty">{{ s.t }}</span>
+            <span style="display:block;font-family:var(--font-heading);font-size:22px;font-weight:700;line-height:1.25;color:#000000;text-wrap:pretty">{{ s.t }}</span>
             <sc-if value="{{ s.sp }}" hint-placeholder-val="{{ true }}">
               <span style="display:block;font-family:var(--font-heading);font-size:17px;font-weight:700;color:var(--color-accent);margin-top:5px">{{ s.sp }}</span>
             </sc-if>
@@ -201,7 +201,7 @@ input,select{font-family:var(--font-body);}
           <button type="button" onClick="{{ r.toggle }}" style="width:100%;text-align:left;display:grid;grid-template-columns:150px minmax(0,1fr) 26px;gap:26px;align-items:baseline;padding:20px 20px 20px 4px;background:#ffffff;border:0;cursor:pointer;font-family:var(--font-body)" style-hover="background:var(--color-accent-100)">
             <span style="font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:.02em;color:var(--color-accent-2)">{{ r.short }}</span>
             <span>
-              <span style="display:block;font-family:var(--font-heading);font-size:22px;font-weight:700;line-height:1.25;color:var(--color-text);text-wrap:pretty">{{ r.t }}</span>
+              <span style="display:block;font-family:var(--font-heading);font-size:22px;font-weight:700;line-height:1.25;color:#000000;text-wrap:pretty">{{ r.t }}</span>
               <sc-if value="{{ r.sp }}" hint-placeholder-val="{{ true }}">
                 <span style="display:block;font-family:var(--font-heading);font-size:17px;font-weight:700;color:var(--color-accent);margin-top:5px">{{ r.sp }}</span>
               </sc-if>
@@ -271,7 +271,7 @@ input,select{font-family:var(--font-body);}
     <sc-for list="{{ dirList }}" as="m" hint-placeholder-count="9">
       <div style="border-right:1px solid var(--color-neutral-300);border-bottom:1px solid var(--color-neutral-300);padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px">
         <div>
-          <div style="font-family:var(--font-heading);font-size:20px;font-weight:700;line-height:1.2">{{ m.n }}</div>
+          <div style="font-family:var(--font-heading);font-size:20px;font-weight:700;line-height:1.2;color:#000000">{{ m.n }}</div>
           <div style="font-size:13px;color:var(--color-accent-2);margin-top:4px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline">
             <sc-if value="{{ m.co }}" hint-placeholder-val="{{ true }}">
               <span style="font-weight:600;color:var(--color-accent-2-700)">{{ m.co }}</span>
@@ -431,7 +431,7 @@ input,select{font-family:var(--font-body);}
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:26px 30px 20px;border-bottom:1px solid var(--color-neutral-300)">
         <div>
           <div style="font-family:var(--font-heading);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent);margin-bottom:10px">{{ modal.long }}</div>
-          <h3 class="dialog-title" style="font-family:var(--font-heading);font-size:28px;font-weight:700;line-height:1.15;margin:0">{{ modal.t }}</h3>
+          <h3 class="dialog-title" style="font-family:var(--font-heading);font-size:28px;font-weight:700;line-height:1.15;margin:0;color:#000000">{{ modal.t }}</h3>
         </div>
         <button class="btn btn-ghost" type="button" onClick="{{ closeModal }}" style="flex:0 0 auto">Close</button>
       </div>
