@@ -1,0 +1,67 @@
+Paste the RECORDING and DECK columns into the Session Calendar tab.
+Match rows by DATE — the site reads these columns by header name, so they can sit anywhere.
+
+DATE	TOPIC	RECORDING	DECK
+7/31/2026	What's Your Intellectual Property Status? It's Complicated.	https://drive.google.com/file/d/1f-F6ojlhb5nbJ53XMk5cWOAqTnI4teKq/view	
+7/24/2026	What 10,000 Personalities Reveal About How Business Buyers Actually Decide	https://drive.google.com/file/d/1S6aUbUSTVxk2XO-Cn9GSMLKKSMiVsWaS/view	
+7/17/2026	What Technology Companies Can Learn from Theater	https://drive.google.com/file/d/11hKVlgi56A6J6uFlRWBQsclZP1omVwXf/view	
+7/10/2026	Higher Highs, and Lower Lows: The Roller Coaster of Higher Ed Teaching	https://drive.google.com/file/d/12qStmj66WDwxi4-u8DMoPaWGMqEW19QH/view	
+6/26/2026	The AI Antidote: In-Person, Small Group Meetings	https://drive.google.com/file/d/1eWwsG2i4gD5BqrfjTaljT1nx6VnToQnH/view	
+6/19/2026	Tips, Tricks & Tech Tools	https://drive.google.com/file/d/1lBEaJbzhmXo72NSyfV64tsqfqNvffIm2/view	
+6/12/2026	What Will You Be (Doing) in the AI Job Apocalypse?	https://drive.google.com/file/d/1lR3H0iKSiJwJfTbu01hirepzR-7C7N2a/view	https://drive.google.com/file/d/14_JJv0BWyIeZtHt0u3uSZ1sNo1WL4D7y/view
+6/5/2026	Equip Your Buyer Champion to Seal the Deal	https://drive.google.com/file/d/1PMw2mnTGdEM-TPJ_XfwLN-lrCNtwUPUQ/view	
+5/29/2026	Summer plans, anyone?	https://drive.google.com/file/d/1NzsfDb04GIZ9bL5HEasrMzIMkB-n_Gfg/view	
+5/22/2026	Buckle up. AI is Changing Everything You Think You Know About Advertising	https://drive.google.com/file/d/1fZ3j08oRZn2ddCbfaMVH3D91NPXW_d2n/view	
+5/15/2026	Using AI for GTM strategies.	https://drive.google.com/file/d/1hwnszmusqvnln38M5ydKkBId45Vcmk6m/view	https://drive.google.com/file/d/1esCAawlMwFD1gaYEnOxkWFyrMVSXw1Ig/view
+5/8/2026	Reigniting Your Network	https://drive.google.com/file/d/1lnb2iGsbnbmrkFcAHKjnqcYOHTCe-QfQ/view	
+5/1/2026	Search Evolution - SEO to GEO and beyond	https://drive.google.com/file/d/1AqM8ADoqFi1qPWbz5D8w8K-5j6lCQh5P/view	
+4/24/2026	Business Development - Part 2	https://drive.google.com/file/d/1db5oQZJrAznSRMR7G_u_iIiZCk8Pp1Ma/view	
+4/17/2026	6th anniversary celebration & member mingle	https://drive.google.com/file/d/1QfsOJIliXAUm5jf_ba9ttXHpcc-ExYCD/view	
+4/10/2026	The American Customer: The Hidden Forces That Shape Choice	https://drive.google.com/file/d/1KNKqCeAprPvTWrAwYxiQ2apw6BlK6Hsz/view	
+4/3/2026	Hendrik-Jan - elevator + di	https://drive.google.com/file/d/120mmvEnH8P0hexuTRO1PfuNHspN7Gujm/view	
+3/27/2026	Build a Business with a Bigger Purpose	https://drive.google.com/file/d/1sXhM9rwuvBBV1dHzKoXMFKm9baghEHik/view	
+3/20/2026	MaGiC Unconference - BYO Issue	https://drive.google.com/file/d/1wMfqD0WwjUZ8e82cAh_RmMs35rWdPk5d/view	
+3/13/2026	I am Replacing Myself with AI Before AI Does	https://drive.google.com/file/d/1ocEpVLWbGfyO5M93dmI7GOGzKVKCLR-D/view	
+3/6/2026	The Community Conversation: An Unlikely M&A Journey	https://drive.google.com/file/d/13QC6dicDMfuO78rrSKr1UVMz7vy8aHOB/view	
+2/27/2026	Transforming Personal Tragedy into a National Literacy Movement - changing date	https://drive.google.com/file/d/19HZYCTaU5F3RfoDrneo-A5JKbtNcRfID/view	
+2/20/2026	Building a Business Development Engine That Actually Delivers	https://drive.google.com/file/d/1W0QdhjeBZCtn8nJD-p12vS2NopwyNRYC/view	
+2/13/2026	Startup Journey for Audio Docent app	https://drive.google.com/file/d/1D9_gAgry_F-8-M57_iMAc5doasEATevP/view	https://docs.google.com/presentation/d/1n2wxvS33KZ4jiCYKP91OrfZr6GM610PDTTHEzXVXnxk/edit
+2/6/2026	Interactive Strategy Session	https://drive.google.com/file/d/1QZZDmjSUYT9lqCOHUg5SFigd5EOCijwU/view	
+1/30/2026	What the Dolphins Told Me	https://drive.google.com/file/d/1BKaFbOAYtgfT0nXUZs0gFCUWZRuPvdvP/view	
+1/16/2026	Mapping the Media Market	https://drive.google.com/file/d/15ayg0bjDkB4_hMSI7ucKA9zRMdJ2b0BO/view	
+12/12/2025	Decision-making	https://drive.google.com/file/d/1xAiU3H7BHUEcP7DVpRV2TRKCzvlyf3xD/view	
+12/5/2025	BYO Client: Local Uber Concept	https://drive.google.com/file/d/1PSqv7su3ZXeEO7XHNPTwMM1aoQx4Angx/view	
+11/21/2025	Diving Deeper on Customer Journey. Part 2. Journey Management	https://drive.google.com/file/d/1LKCA7Z2mzpmfwF6bH16Ma4jXGlW8u29b/view	
+11/14/2025	Working in and on your business	https://drive.google.com/file/d/1u-La9Argd2DG1trvwHok-9KaCj-wWJC3/view	
+10/31/2025	Tales from the box	https://drive.google.com/file/d/1eG0KuIGoIwp4AFRMfycInNYOXpkyBYQw/view	
+10/24/2025	Rewarding work with Afghan women	https://drive.google.com/file/d/1XWIrJal4POSANkVT23NCKTg47XlqTnUw/view	
+10/17/2025	AI is Power Hungry	https://drive.google.com/file/d/1oGoBsSoxwgHTXk14-44AobN_HXxLiKCT/view	
+10/10/2025	SuperPowers - How to uncover yours	https://drive.google.com/file/d/18g2gBCifK_t-9K79hRrIMOcwqc-jVvJi/view	
+10/3/2025	Pitch Perfect	https://drive.google.com/file/d/14vpCYK_JpGoikVMf1_bi3PKOnUbIE7vO/view	
+9/26/2025	Customer journey mapping and management	https://drive.google.com/file/d/11sXqVIlXbZdcR2uvls9tbNsAzWBwnrk8/view	https://drive.google.com/file/d/14dbyEvCZHBayEivMGV__8cVHMIYVsNV7/view
+9/19/2025	An ethical approach to marketing.	https://drive.google.com/file/d/12St-x3BKFtIJNLIAO0Wocf2a1m42PRLO/view	
+9/12/2025	Ultra - personal marketing - where AI is going	https://drive.google.com/file/d/1cgeHKH51EDM2v9yh0QPcFoDTAdhW67x_/view	
+8/15/2025	SEO - "Zero-Click" world	https://drive.google.com/file/d/1edWXHemrA47zQxL8RxxzdhqluAUsCK3h/view	
+8/8/2025	SEO - "Death of Key Words"	https://drive.google.com/file/d/11IC6Zq_69LqPBqLE3uVzyq7JYv7vAfBc/view	https://drive.google.com/file/d/1X1XHu-FCJXrUn-YqDbMG10iDP-dA-UVI/view
+8/1/2025	Second session on Free AI Tools and How to use them.	https://drive.google.com/file/d/1xpCPZO93n54fB4UEPtlCbAFLjGK8WCF2/view	
+7/25/2025	Top Ten Free AI Tools and How to Use Them	https://drive.google.com/file/d/1wIUqvCcEcHXgMV1hQI9EWOB77Bpm_QKW/view	https://drive.google.com/file/d/1Wt9XhX8hsxgO951qUCY5ZYZLilaNV7bN/view
+7/18/2025	From Turmoil to Triumph	https://drive.google.com/file/d/14fFJKO4YEzVgC00nv9PvBXFHS8OKHnY9/view	https://drive.google.com/file/d/1TfdjV5a3oQ0hR3wPcJvhPlm77aOZlnpF/view
+7/11/2025	Neuroscience of Attention - Part 2	https://drive.google.com/file/d/1v20CfRt9nvkqC93v3W9KBSK6LMKwerM_/view	
+6/27/2025	What you don't know about corporate philanthropy	https://drive.google.com/file/d/1tj2cToHZpqPUj-dPszQO0kuoHXx-k2Wv/view	https://drive.google.com/file/d/1FsDelrWkOQxYDbtcH6xsihB0JYNwY7iG/view
+6/20/2025	Marketing in the age of AI/business upheaval/geo-political upheaval.	https://drive.google.com/file/d/1SVABjBkL7okRKAzJKAgc609s_7aFxtUP/view	
+6/6/2025	Neuroscience of Attention	https://drive.google.com/file/d/18By564-k5JZZXF5GZKt-7wC5N19bbuyL/view	
+5/30/2025	Customer success means growth!	https://drive.google.com/file/d/1Xuvdc5n6JqWiANMXvcR2BBmaZd0vBTDG/view	
+5/16/2025	Community	https://drive.google.com/file/d/1xbnqrIY2NrmQfxptz6EHAcfz5jSsIU2N/view	
+5/9/2025	Contact to Close	https://drive.google.com/file/d/160L1HB0cnkJtXHiNbb2HZ9glUvd4Rn0c/view	https://docs.google.com/presentation/d/1H_KIzLBaEMAKvIBTUNfRdtNUsOIo3bfJE0fBiv2ALHc/edit
+5/2/2025	Innovation and Tool Hacker	https://drive.google.com/file/d/1paYY-dulMjtu68QxcvvHtsNEoOcKrVlf/view	
+4/25/2025	Ideation of Carbon	https://drive.google.com/file/d/1wXbrAz3UmeacH9asIh9_rqylezwUkwsX/view	
+4/18/2025	MaGiCal Stories: 5th Anniversary Celebration	https://drive.google.com/file/d/1r7ORK9nAQ4uUL2YCQtcbLewDY8Gf0VBr/view	
+4/11/2025	Get a Grip: Breaking Through the Ceiling for Your Growing Business	https://drive.google.com/file/d/1LAgIyiYukXbMD4geqR1hX994TTChaCCe/view	
+4/4/2025	State of AI + Software In 2025	https://drive.google.com/file/d/1Bf3B5ZxNddFA61Uk01acrxdIHQnhe6LI/view	https://drive.google.com/file/d/1tHSHqQTWaamDHY1SnEySeKTiSO4Wnarf/view
+3/28/2025	AI is revolutionizing healthcare.	https://drive.google.com/file/d/1GGPQxKllvm8rlQgnfSGKN7HIe29kv3ML/view	
+3/21/2025	“Building value in an AI world.”	https://drive.google.com/file/d/1zQmCJtMe9qqzn9MEF8g547Dz1_dbuubS/view	
+3/14/2025	Lessons learned from our very own Chris Elwell	https://drive.google.com/file/d/1LiBuXgJgp0Sys1bJmfQnMFWdYgJNv8fp/view	
+3/7/2025	Transform Your Career with 'Reinventing Your Career Path'	https://drive.google.com/file/d/1RNFuNHkJE_DX4KuTlXRfeH-AC4cxCg4p/view	https://drive.google.com/file/d/1E_lPvGbdlvycieR9DukglDWOi55bUd7U/view
+2/28/2025	"You said it!"	https://drive.google.com/file/d/1PGylVDSRh_zC2CORknLAfrUq3IJlL9ol/view	
+2/21/2025	He'll then launch an interactive conversation about pricing and AI. How to price it and how to use it to help with your pricing.	https://drive.google.com/file/d/14rK1GdfR35_q2l6Jvv-2JWtAE7WqDYwf/view	https://drive.google.com/file/d/1jpDOZRAvJWyTK2IXmZliNEOmOU3U4gv9/view
+2/14/2025	- What's the most common mistake that managers, especially those who care greatly for their subordinates, commit?	https://drive.google.com/file/d/1j8fJoISdo411ZWQojwqOKfR-4WwQwONc/view	
