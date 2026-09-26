@@ -49,12 +49,14 @@ button.tag-outline:hover{background:#eef1fa;border-color:#4a5fa8;color:#3d5091;}
 button.tag-accent:hover{background:#4a5fa8;border-color:#4a5fa8;}
 input,select{font-family:var(--font-body);}
 .btn:hover,a.btn:hover,button.btn:hover{color:#000000;}
+/* Phones: the wrapped nav is too tall to stay pinned. */
+@media (max-width:700px){nav{position:static!important}html{scroll-padding-top:0}}
 </style>
 </helmet>
 
 <div style="background:#ffffff;min-height:100vh">
 
-<nav style="position:sticky;top:0;z-index:60;background:#ffffff;border-bottom:1px solid var(--color-neutral-300);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:13px 40px;flex-wrap:wrap">
+<nav style="position:sticky;top:0;z-index:60;background:#ffffff;border-bottom:1px solid var(--color-neutral-300);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:13px clamp(16px,5vw,40px);flex-wrap:wrap">
   <a href="#top" style="display:flex;align-items:center;gap:14px;text-decoration:none">
     <img src="assets/MAGIC.png" alt="MAGIC" style="height:33px;width:auto;display:block">
     <span style="font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:.01em;color:var(--color-accent-2);border-left:1px solid var(--color-neutral-200);padding-left:14px">Ideas worth stealing from people worth knowing.</span>
@@ -69,22 +71,22 @@ input,select{font-family:var(--font-body);}
   </div>
 </nav>
 
-<header id="top" style="max-width:1280px;margin:0 auto;padding:76px 40px 0">
-  <div style="display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:56px;align-items:start">
-    <div>
+<header id="top" style="max-width:1280px;margin:0 auto;padding:clamp(40px,8vw,76px) clamp(16px,5vw,40px) 0">
+  <div style="display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,56px);align-items:flex-start">
+    <div style="flex:999 1 0;min-width:55%">
       <div style="font-family:var(--font-heading);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-accent);margin-bottom:26px">Together since spring 2020 · Invitation only</div>
-      <h1 style="font-family:var(--font-heading);color:#000000;font-size:62px;font-weight:700;line-height:1.02;letter-spacing:-.022em;margin:0 0 26px;max-width:16ch;text-wrap:balance">A thought leadership community of accomplished business leaders.</h1>
+      <h1 style="font-family:var(--font-heading);color:#000000;font-size:clamp(40px,8vw,62px);font-weight:700;line-height:1.02;letter-spacing:-.022em;margin:0 0 26px;max-width:16ch;text-wrap:balance">A thought leadership community of accomplished business leaders.</h1>
       <p style="font-size:19px;line-height:1.55;max-width:52ch;margin:0 0 34px;color:var(--color-accent-2-700);text-wrap:pretty">Roughly 100 caring colleagues learning and growing together. Sharing new ideas, methods, and experiences in marketing, AI, business strategy, and personal development, as well as occasional community discussions with breakout sessions to deepen our connections.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <a class="btn btn-ghost" href="#directory" style="text-decoration:none">Member directory</a>
         <a class="btn btn-secondary" href="https://www.linkedin.com/groups/14198946" target="_blank" rel="noopener" style="text-decoration:none">Private LinkedIn group ↗</a>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:22px">
+    <div style="flex:1 1 340px;display:flex;flex-direction:column;gap:22px">
     <div style="border:1px solid var(--color-neutral-300)">
       <div style="padding:26px 26px 24px">
         <div style="font-family:var(--font-heading);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--color-accent);margin-bottom:16px">Weekly 1-hour Sessions</div>
-        <div style="font-family:var(--font-heading);color:#000000;font-size:38px;font-weight:700;line-height:1;margin-bottom:14px">Every Friday</div>
+        <div style="font-family:var(--font-heading);color:#000000;font-size:clamp(30px,6vw,38px);font-weight:700;line-height:1;margin-bottom:14px">Every Friday</div>
         <div style="display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.6;color:var(--color-accent-2-700)">
           <div><strong style="font-weight:700;color:var(--color-text)">10 AM</strong> Pacific</div>
           <div><strong style="font-weight:700;color:var(--color-text)">11 AM</strong> Mountain</div>
@@ -104,16 +106,16 @@ input,select{font-family:var(--font-body);}
   </div>
 
   <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--color-neutral-300);border-bottom:1px solid var(--color-neutral-300);margin-top:64px">
-    <div style="padding:26px 24px 26px 0;border-right:1px solid var(--color-neutral-200)">
-      <div style="font-family:var(--font-heading);color:#000000;font-size:40px;font-weight:700;line-height:1">~100</div>
+    <div style="padding:26px clamp(10px,3vw,24px) 26px 0;border-right:1px solid var(--color-neutral-200)">
+      <div style="font-family:var(--font-heading);color:#000000;font-size:clamp(30px,7vw,40px);font-weight:700;line-height:1">~100</div>
       <div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-2);margin-top:6px">Members</div>
     </div>
-    <div style="padding:26px 24px;border-right:1px solid var(--color-neutral-200)">
-      <div style="font-family:var(--font-heading);color:#000000;font-size:40px;font-weight:700;line-height:1">{{ sessionCount }}</div>
+    <div style="padding:26px clamp(10px,3vw,24px);border-right:1px solid var(--color-neutral-200)">
+      <div style="font-family:var(--font-heading);color:#000000;font-size:clamp(30px,7vw,40px);font-weight:700;line-height:1">{{ sessionCount }}</div>
       <div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-2);margin-top:6px">Sessions held</div>
     </div>
-    <div style="padding:26px 0 26px 24px">
-      <div style="font-family:var(--font-heading);color:#000000;font-size:40px;font-weight:700;line-height:1">6</div>
+    <div style="padding:26px 0 26px clamp(10px,3vw,24px)">
+      <div style="font-family:var(--font-heading);color:#000000;font-size:clamp(30px,7vw,40px);font-weight:700;line-height:1">6</div>
       <div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-2);margin-top:6px">Years running</div>
     </div>
   </div>
@@ -121,15 +123,15 @@ input,select{font-family:var(--font-body);}
   <p style="font-size:15px;line-height:1.7;color:var(--color-accent-2-700);max-width:96ch;margin:26px 0 0">We bring collective experience from Accenture, Amazon, Blue Cross, Chevron, Citibank, Deloitte, Dow Chemical, E&amp;Y, Expedia, Google, IBM, Intel, Johnson &amp; Johnson, Lending Club, LexisNexis, Microsoft, P&amp;G, Siemens and T-Mobile — alongside myriad smaller companies and nonprofits.</p>
 </header>
 
-<section id="calendar" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
+<section id="calendar" style="max-width:1280px;margin:0 auto;padding:clamp(56px,10vw,80px) clamp(16px,5vw,40px) 0">
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px">
-    <h2 style="font-family:var(--font-heading);font-size:34px;font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Session Calendar</h2>
+    <h2 style="font-family:var(--font-heading);font-size:clamp(28px,6vw,34px);font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Session Calendar</h2>
     <div style="font-size:14px;color:var(--color-accent-2)">Upcoming Fridays, 1 pm ET</div>
   </div>
 
   <sc-if value="{{ hasNext }}" hint-placeholder-val="{{ true }}">
-    <article style="border:1px solid var(--color-neutral-300);display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);margin-bottom:34px">
-      <div style="background:var(--color-accent);color:#ffffff;padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between">
+    <article style="border:1px solid var(--color-neutral-300);display:flex;flex-wrap:wrap;margin-bottom:34px">
+      <div style="flex:1 1 240px;background:var(--color-accent);color:#ffffff;padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between">
         <div style="font-family:var(--font-heading);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Next session</div>
         <div>
           <div style="font-family:var(--font-heading);font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-top:26px">{{ next.dow }}</div>
@@ -137,9 +139,9 @@ input,select{font-family:var(--font-body);}
           <div style="font-family:var(--font-heading);font-size:17px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">{{ next.moyr }}</div>
         </div>
       </div>
-      <div style="padding:30px 30px 26px">
+      <div style="flex:999 1 0;min-width:55%;padding:clamp(22px,5vw,30px) clamp(18px,5vw,30px) 26px">
         <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-2);margin-bottom:12px">{{ next.th }}</div>
-        <h3 style="font-family:var(--font-heading);color:#000000;font-size:32px;font-weight:700;line-height:1.14;margin:0 0 14px;letter-spacing:-.01em;text-wrap:pretty">{{ next.t }}</h3>
+        <h3 style="font-family:var(--font-heading);color:#000000;font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.14;margin:0 0 14px;letter-spacing:-.01em;text-wrap:pretty">{{ next.t }}</h3>
         <p style="font-size:15px;line-height:1.65;color:var(--color-accent-2-700);margin:0 0 22px;max-width:78ch">{{ next.blurb }}</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <a class="btn btn-primary" href="https://zoom.us/j/4065516269#success" target="_blank" rel="noopener" style="text-decoration:none">Join on Zoom</a>
@@ -151,7 +153,7 @@ input,select{font-family:var(--font-body);}
   <div style="border-top:1px solid var(--color-neutral-300)">
     <sc-for list="{{ upcoming }}" as="s" hint-placeholder-count="6">
       <div style="border-bottom:1px solid var(--color-neutral-300)">
-        <button type="button" onClick="{{ s.toggle }}" style="text-align:left;background:#ffffff;border:0;padding:20px 20px 20px 4px;cursor:pointer;font-family:var(--font-body);display:grid;grid-template-columns:150px minmax(0,1fr) 26px;gap:26px;align-items:baseline;width:100%" style-hover="background:var(--color-accent-100)">
+        <button type="button" onClick="{{ s.toggle }}" style="text-align:left;background:#ffffff;border:0;padding:20px 20px 20px 4px;cursor:pointer;font-family:var(--font-body);display:grid;grid-template-columns:clamp(84px,20vw,150px) minmax(0,1fr) 26px;gap:clamp(12px,3vw,26px);align-items:baseline;width:100%" style-hover="background:var(--color-accent-100)">
           <span style="font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:.02em;color:var(--color-accent-2)">{{ s.short }}</span>
           <span>
             <span style="display:block;font-family:var(--font-heading);font-size:22px;font-weight:700;line-height:1.25;color:#000000;text-wrap:pretty">{{ s.t }}</span>
@@ -162,7 +164,7 @@ input,select{font-family:var(--font-body);}
           <span style="font-family:var(--font-heading);font-size:20px;line-height:1;color:var(--color-accent);text-align:right">{{ s.sign }}</span>
         </button>
         <sc-if value="{{ s.isOpen }}" hint-placeholder-val="{{ false }}">
-          <div style="padding:0 20px 26px 180px">
+          <div style="padding:0 20px 26px clamp(4px,(100vw - 700px) * 100,180px)">
             <div>
               <p style="font-size:15px;line-height:1.7;color:var(--color-accent-2-700);margin:0 0 18px;max-width:76ch;white-space:pre-wrap">{{ s.blurb }}</p>
               <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -177,9 +179,9 @@ input,select{font-family:var(--font-body);}
 
 </section>
 
-<section id="recordings" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
+<section id="recordings" style="max-width:1280px;margin:0 auto;padding:clamp(56px,10vw,80px) clamp(16px,5vw,40px) 0">
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px">
-    <h2 style="font-family:var(--font-heading);font-size:34px;font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Session Recordings</h2>
+    <h2 style="font-family:var(--font-heading);font-size:clamp(28px,6vw,34px);font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Session Recordings</h2>
     <div style="font-size:14px;color:var(--color-accent-2)">Members only · hosted on the MAGIC Drive</div>
   </div>
   <div style="display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
@@ -202,7 +204,7 @@ input,select{font-family:var(--font-body);}
     <div style="border-top:1px solid var(--color-neutral-300)">
       <sc-for list="{{ recList }}" as="r" hint-placeholder-count="10">
         <div style="border-bottom:1px solid var(--color-neutral-300)">
-          <button type="button" onClick="{{ r.toggle }}" style="width:100%;text-align:left;display:grid;grid-template-columns:150px minmax(0,1fr) 26px;gap:26px;align-items:baseline;padding:20px 20px 20px 4px;background:#ffffff;border:0;cursor:pointer;font-family:var(--font-body)" style-hover="background:var(--color-accent-100)">
+          <button type="button" onClick="{{ r.toggle }}" style="width:100%;text-align:left;display:grid;grid-template-columns:clamp(84px,20vw,150px) minmax(0,1fr) 26px;gap:clamp(12px,3vw,26px);align-items:baseline;padding:20px 20px 20px 4px;background:#ffffff;border:0;cursor:pointer;font-family:var(--font-body)" style-hover="background:var(--color-accent-100)">
             <span style="font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:.02em;color:var(--color-accent-2)">{{ r.short }}</span>
             <span>
               <span style="display:block;font-family:var(--font-heading);font-size:22px;font-weight:700;line-height:1.25;color:#000000;text-wrap:pretty">{{ r.t }}</span>
@@ -213,7 +215,7 @@ input,select{font-family:var(--font-body);}
             <span style="font-family:var(--font-heading);font-size:20px;line-height:1;color:var(--color-accent);text-align:right">{{ r.sign }}</span>
           </button>
           <sc-if value="{{ r.isOpen }}" hint-placeholder-val="{{ false }}">
-            <div style="padding:0 20px 26px 180px">
+            <div style="padding:0 20px 26px clamp(4px,(100vw - 700px) * 100,180px)">
               <p style="font-size:15px;line-height:1.7;color:var(--color-accent-2-700);margin:0 0 18px;max-width:76ch;white-space:pre-wrap">{{ r.blurb }}</p>
               <div style="display:flex;gap:12px;flex-wrap:wrap">
                 <a class="btn btn-primary" href="{{ r.primaryHref }}" target="_blank" rel="noopener" style="text-decoration:none">{{ r.primaryLabel }}</a>
@@ -235,14 +237,14 @@ input,select{font-family:var(--font-body);}
   </div>
 </section>
 
-<section id="directory" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
+<section id="directory" style="max-width:1280px;margin:0 auto;padding:clamp(56px,10vw,80px) clamp(16px,5vw,40px) 0">
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:34px">
-    <h2 style="font-family:var(--font-heading);font-size:34px;font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Member Directory</h2>
+    <h2 style="font-family:var(--font-heading);font-size:clamp(28px,6vw,34px);font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Member Directory</h2>
     <div style="font-size:14px;color:var(--color-accent-2)">Search by name, company, city or expertise</div>
   </div>
 
   <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
-    <input class="input" type="search" placeholder="Search members…" value="{{ q }}" onChange="{{ onQ }}" style="flex:1 1 320px;min-width:220px">
+    <input class="input" type="search" placeholder="Search members…" value="{{ q }}" onChange="{{ onQ }}" style="flex:1 1 320px;min-width:0">
     <select class="input" value="{{ st }}" onChange="{{ onState }}" style="flex:0 1 150px;min-width:130px;font-family:var(--font-body)">
       <option value="">All states</option>
       <sc-for list="{{ states }}" as="o" hint-placeholder-count="6">
@@ -260,9 +262,9 @@ input,select{font-family:var(--font-body);}
       <button type="button" class="{{ allTag.cls }}" onClick="{{ allTag.pick }}" style="cursor:pointer;border-width:1px;border-radius:999px;padding-left:14px;padding-right:14px;font-family:var(--font-body)">{{ allTag.label }}</button>
     </div>
     <sc-for list="{{ tagGroups }}" as="g" hint-placeholder-count="5">
-      <div style="display:grid;grid-template-columns:190px minmax(0,1fr);gap:16px;align-items:baseline;padding-top:6px;border-top:{{ g.rule }}">
-        <div style="font-family:var(--font-heading);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-400);white-space:nowrap">{{ g.name }}</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div style="display:flex;flex-wrap:wrap;column-gap:16px;row-gap:8px;align-items:baseline;padding-top:6px;border-top:{{ g.rule }}">
+        <div style="font-family:var(--font-heading);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-400);white-space:nowrap;flex:0 0 190px">{{ g.name }}</div>
+        <div style="flex:1 1 320px;min-width:0;display:flex;gap:8px;flex-wrap:wrap">
           <sc-for list="{{ g.tags }}" as="t" hint-placeholder-count="4">
             <button type="button" class="{{ t.cls }}" onClick="{{ t.pick }}" style="cursor:pointer;border-width:1px;border-radius:999px;padding-left:14px;padding-right:14px;font-family:var(--font-body)">{{ t.label }}</button>
           </sc-for>
@@ -271,7 +273,7 @@ input,select{font-family:var(--font-body);}
     </sc-for>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--color-neutral-300);border-left:1px solid var(--color-neutral-300)">
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));border-top:1px solid var(--color-neutral-300);border-left:1px solid var(--color-neutral-300)">
     <sc-for list="{{ dirList }}" as="m" hint-placeholder-count="9">
       <div style="border-right:1px solid var(--color-neutral-300);border-bottom:1px solid var(--color-neutral-300);padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px">
         <div>
@@ -316,35 +318,35 @@ input,select{font-family:var(--font-body);}
   </sc-if>
 </section>
 
-<section id="speak" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
+<section id="speak" style="max-width:1280px;margin:0 auto;padding:clamp(56px,10vw,80px) clamp(16px,5vw,40px) 0">
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:44px">
-    <h2 style="font-family:var(--font-heading);font-size:34px;font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Speaking at MAGIC</h2>
+    <h2 style="font-family:var(--font-heading);font-size:clamp(28px,6vw,34px);font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Speaking at MAGIC</h2>
   </div>
 
-  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:56px;align-items:start">
-    <div>
-      <h3 style="font-family:var(--font-heading);color:#000000;font-size:38px;font-weight:700;line-height:1.08;letter-spacing:-.015em;margin:0 0 20px;max-width:18ch">Sharing your expertise is a gift to the community.</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,56px);align-items:flex-start">
+    <div style="flex:1 1 380px;min-width:0">
+      <h3 style="font-family:var(--font-heading);color:#000000;font-size:clamp(28px,6vw,38px);font-weight:700;line-height:1.08;letter-spacing:-.015em;margin:0 0 20px;max-width:18ch">Sharing your expertise is a gift to the community.</h3>
       <p style="font-size:16px;line-height:1.65;color:var(--color-accent-2-700);margin:0 0 16px;max-width:52ch">We are a community of experienced professionals. We believe that we get by giving — it is our focus and our primary activity. Many members report that they have benefited from referrals or resources from others.</p>
       <p style="font-size:16px;line-height:1.65;color:var(--color-accent-2-700);margin:0 0 28px;max-width:52ch">MAGIC is not a "networking" group. As a result, making a pitch is counterproductive and will diminish your own MAGIC. We think of you more highly than that.</p>
       <a class="btn btn-primary" href="mailto:ll@connectedcom.com?cc=howard@redroostergroup.com&amp;subject=MAGIC%20speaker%20request&amp;body=Hi%20Leslie%20and%20Howard%2C%0A%0AI%27d%20like%20to%20share%20at%20a%20Friday%20MAGIC%20session.%0A%0ATopic%3A%0AWhat%20the%20audience%20will%20gain%3A%0AShort%20bio%20(1-2%20sentences)%3A%0ALinks%20(LinkedIn%2C%20site%2C%20book)%3A%0APreferred%20dates%3A%0A%0AThank%20you%2C%0A" style="text-decoration:none">Request a speaking date</a>
     </div>
-    <div>
+    <div style="flex:1.15 1 420px;min-width:0">
       <div style="border:1px solid var(--color-neutral-300);margin-bottom:26px">
         <div style="padding:20px 24px;border-bottom:1px solid var(--color-neutral-300);font-family:var(--font-heading);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Considerations</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr">
-          <div style="padding:20px 24px;border-right:1px solid var(--color-neutral-200);border-bottom:1px solid var(--color-neutral-200)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));overflow:hidden">
+          <div style="padding:20px 24px;border-right:1px solid var(--color-neutral-200);border-bottom:1px solid var(--color-neutral-200);margin:0 -1px -1px 0">
             <div style="font-family:var(--font-heading);font-size:15px;font-weight:700;margin-bottom:6px">Not a pitch</div>
             <div style="font-size:14px;line-height:1.5;color:var(--color-accent-2-700)">The group is a community, not a sales opportunity.</div>
           </div>
-          <div style="padding:20px 24px;border-bottom:1px solid var(--color-neutral-200)">
+          <div style="padding:20px 24px;border-right:1px solid var(--color-neutral-200);border-bottom:1px solid var(--color-neutral-200);margin:0 -1px -1px 0">
             <div style="font-family:var(--font-heading);font-size:15px;font-weight:700;margin-bottom:6px">Seasoned audience</div>
             <div style="font-size:14px;line-height:1.5;color:var(--color-accent-2-700)">Members are experienced marketers seeking advanced insights.</div>
           </div>
-          <div style="padding:20px 24px;border-right:1px solid var(--color-neutral-200)">
+          <div style="padding:20px 24px;border-right:1px solid var(--color-neutral-200);border-bottom:1px solid var(--color-neutral-200);margin:0 -1px -1px 0">
             <div style="font-family:var(--font-heading);font-size:15px;font-weight:700;margin-bottom:6px">A conversation</div>
             <div style="font-size:14px;line-height:1.5;color:var(--color-accent-2-700)">Sessions are interactive, with 20+ members attending each week.</div>
           </div>
-          <div style="padding:20px 24px">
+          <div style="padding:20px 24px;border-right:1px solid var(--color-neutral-200);border-bottom:1px solid var(--color-neutral-200);margin:0 -1px -1px 0">
             <div style="font-family:var(--font-heading);font-size:15px;font-weight:700;margin-bottom:6px">Transparency</div>
             <div style="font-size:14px;line-height:1.5;color:var(--color-accent-2-700)">Share behind-the-scenes details and lessons learned.</div>
           </div>
@@ -375,12 +377,14 @@ input,select{font-family:var(--font-body);}
 </section>
 
 <section id="exchange" style="margin-top:88px;border-top:1px solid var(--color-neutral-300);border-bottom:1px solid var(--color-neutral-300);background:var(--color-surface)">
-  <div style="max-width:1280px;margin:0 auto;padding:64px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,8vw,64px) clamp(16px,5vw,40px);display:flex;flex-wrap:wrap;gap:clamp(32px,6vw,56px);align-items:center">
+    <div style="flex:1 1 360px;min-width:0">
     <div style="max-width:50ch;font-size:17px">
       <img src="assets/MAGIC-Exchange-Header.png" alt="MAGIC Exchange — Questions asked. And answered." style="width:100%;max-width:353px;height:auto;display:block;margin:0 auto 26px">
       <p style="font-size:17px;line-height:1.6;color:var(--color-accent-2-700);margin:0;max-width:50ch;text-wrap:pretty">Need a recommendation, an introduction, a vendor, a second opinion? Send your question to the Exchange and it goes out to the whole community by email. Answers come back from people who have actually done it.</p>
     </div>
-    <div style="border:1px solid var(--color-neutral-300);background:#ffffff;padding:32px 32px 30px">
+    </div>
+    <div style="flex:1 1 360px;min-width:0;border:1px solid var(--color-neutral-300);background:#ffffff;padding:clamp(22px,5vw,32px) clamp(20px,5vw,32px) 30px">
       <h3 style="font-family:var(--font-heading);color:#000000;font-size:28px;font-weight:700;line-height:1.14;margin:0 0 16px">Ask the Group</h3>
       <p style="font-size:15px;line-height:1.6;color:var(--color-accent-2-700);margin:0 0 24px">Email Howard with your question and any context. He'll send it to the group under the MAGIC Exchange banner. Replies come directly to you.</p>
       <a class="btn btn-primary" href="mailto:howard@redroostergroup.com?subject=MAGIC%20Exchange%20request&amp;body=Howard%20%E2%80%94%20please%20send%20this%20to%20the%20group%3A%0A%0AMy%20question%3A%0A%0AContext%20that%20will%20help%20people%20answer%3A%0A%0AHow%20to%20reach%20me%3A%0A%0AThanks%2C%0A" style="text-decoration:none">Email your request to the Exchange</a>
@@ -390,12 +394,12 @@ input,select{font-family:var(--font-body);}
 </section>
 
 <footer style="margin-top:0;border-top:1px solid var(--color-neutral-300);background:var(--color-text);color:#ffffff">
-  <div style="max-width:1280px;margin:0 auto;padding:56px 40px 44px;display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:40px">
-    <div>
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,8vw,56px) clamp(16px,5vw,40px) 44px;display:flex;flex-wrap:wrap;gap:32px 40px">
+    <div style="flex:1.4 1 260px;min-width:0">
       <img src="assets/MAGIC-white.png" alt="MAGIC" style="height:34px;width:auto;display:block;margin-bottom:18px">
       <p style="font-size:14px;line-height:1.6;color:var(--color-neutral-400);margin:0;max-width:34ch">An invitation-only thought leadership community. One hour every Friday, 1 pm ET.</p>
     </div>
-    <div>
+    <div style="flex:1 1 150px;min-width:0">
       <div style="font-family:var(--font-heading);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-neutral-400);margin-bottom:14px">Meet</div>
       <div style="display:flex;flex-direction:column;gap:9px;font-size:14px">
         <a href="https://zoom.us/j/4065516269#success" target="_blank" rel="noopener" style="color:#ffffff" style-hover="color:var(--color-accent-400)">Weekly Zoom link</a>
@@ -403,7 +407,7 @@ input,select{font-family:var(--font-body);}
         <a href="#calendar" style="color:#ffffff" style-hover="color:var(--color-accent-400)">Session calendar</a>
       </div>
     </div>
-    <div>
+    <div style="flex:1 1 150px;min-width:0">
       <div style="font-family:var(--font-heading);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-neutral-400);margin-bottom:14px">Resources</div>
       <div style="display:flex;flex-direction:column;gap:9px;font-size:14px">
         <a href="https://drive.google.com/drive/folders/12GYqnhpjocvP1tL6g60mwy8q-XZDDaCs" target="_blank" rel="noopener" style="color:#ffffff" style-hover="color:var(--color-accent-400)">Recordings</a>
@@ -411,7 +415,7 @@ input,select{font-family:var(--font-body);}
         <a href="#directory" style="color:#ffffff" style-hover="color:var(--color-accent-400)">Member directory</a>
       </div>
     </div>
-    <div>
+    <div style="flex:1 1 150px;min-width:0">
       <div style="font-family:var(--font-heading);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-neutral-400);margin-bottom:14px">Get in touch</div>
       <div style="display:flex;flex-direction:column;gap:9px;font-size:14px">
         <a href="https://mailchi.mp/redroostergroup/magic" target="_blank" rel="noopener" style="color:#ffffff" style-hover="color:var(--color-accent-400)">Join the invitation list</a>
@@ -423,7 +427,7 @@ input,select{font-family:var(--font-body);}
     </div>
   </div>
   <div style="border-top:1px solid var(--color-accent-2-700)">
-    <div style="max-width:1280px;margin:0 auto;padding:20px 40px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--color-neutral-400)">
+    <div style="max-width:1280px;margin:0 auto;padding:20px clamp(16px,5vw,40px);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--color-neutral-400)">
       <span>MAGIC · Email and website design and management handled by Howard Levy at Red Rooster Group</span>
       <span>howard@redroostergroup.com</span>
     </div>
@@ -431,16 +435,16 @@ input,select{font-family:var(--font-body);}
 </footer>
 
 <sc-if value="{{ modal }}" hint-placeholder-val="{{ false }}">
-  <div class="dialog-backdrop" onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:32px">
+  <div class="dialog-backdrop" onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:clamp(12px,4vw,32px)">
     <div class="dialog" onClick="{{ stop }}" style="max-width:720px;width:100%;max-height:82vh;overflow:auto;border:1px solid var(--color-neutral-300);background:#ffffff">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:26px 30px 20px;border-bottom:1px solid var(--color-neutral-300)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:clamp(18px,5vw,26px) clamp(18px,5vw,30px) 20px;border-bottom:1px solid var(--color-neutral-300)">
         <div>
           <div style="font-family:var(--font-heading);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent);margin-bottom:10px">{{ modal.long }}</div>
-          <h3 class="dialog-title" style="font-family:var(--font-heading);font-size:28px;font-weight:700;line-height:1.15;margin:0;color:#000000">{{ modal.t }}</h3>
+          <h3 class="dialog-title" style="font-family:var(--font-heading);font-size:clamp(22px,5vw,28px);font-weight:700;line-height:1.15;margin:0;color:#000000">{{ modal.t }}</h3>
         </div>
         <button class="btn btn-ghost" type="button" onClick="{{ closeModal }}" style="flex:0 0 auto">Close</button>
       </div>
-      <div class="dialog-body" style="padding:24px 30px">
+      <div class="dialog-body" style="padding:24px clamp(18px,5vw,30px)">
         <p style="font-size:15px;line-height:1.7;color:var(--color-accent-2-700);margin:0;white-space:pre-wrap">{{ modal.blurb }}</p>
       </div>
       <div class="dialog-actions" style="padding:0 30px 26px;display:flex;gap:12px;flex-wrap:wrap">
