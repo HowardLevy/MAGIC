@@ -160,7 +160,7 @@ input,select{font-family:var(--font-body);}
           <span style="font-family:var(--font-heading);font-size:20px;line-height:1;color:var(--color-accent);text-align:right">{{ s.sign }}</span>
         </button>
         <sc-if value="{{ s.isOpen }}" hint-placeholder-val="{{ false }}">
-          <div style="padding:0 20px 26px 180px">
+          <div style="padding:0 20px 26px clamp(4px,(100vw - 700px) * 100,180px)">
             <div>
               <p style="font-size:15px;line-height:1.7;color:var(--color-accent-2-700);margin:0 0 18px;max-width:76ch;white-space:pre-wrap">{{ s.blurb }}</p>
               <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -211,7 +211,7 @@ input,select{font-family:var(--font-body);}
             <span style="font-family:var(--font-heading);font-size:20px;line-height:1;color:var(--color-accent);text-align:right">{{ r.sign }}</span>
           </button>
           <sc-if value="{{ r.isOpen }}" hint-placeholder-val="{{ false }}">
-            <div style="padding:0 20px 26px 180px">
+            <div style="padding:0 20px 26px clamp(4px,(100vw - 700px) * 100,180px)">
               <p style="font-size:15px;line-height:1.7;color:var(--color-accent-2-700);margin:0 0 18px;max-width:76ch;white-space:pre-wrap">{{ r.blurb }}</p>
               <div style="display:flex;gap:12px;flex-wrap:wrap">
                 <a class="btn btn-primary" href="{{ r.primaryHref }}" target="_blank" rel="noopener" style="text-decoration:none">{{ r.primaryLabel }}</a>
