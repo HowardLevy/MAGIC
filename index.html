@@ -49,17 +49,51 @@ button.tag-outline:hover{background:#eef1fa;border-color:#4a5fa8;color:#3d5091;}
 button.tag-accent:hover{background:#4a5fa8;border-color:#4a5fa8;}
 input,select{font-family:var(--font-body);}
 .btn:hover,a.btn:hover,button.btn:hover{color:#000000;}
+a{overflow-wrap:anywhere;}
+.m-card{min-width:0;overflow-wrap:anywhere;}
+.m-card p{overflow-wrap:anywhere;}
+.m-desc p{overflow-wrap:anywhere;}
+@media(max-width:1000px){.m-mgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;}}
+@media(max-width:760px){
+.m-pad{padding-left:20px!important;padding-right:20px!important;}
+.m-sec{padding-top:56px!important;}
+.m-top{padding-top:36px!important;}
+.m-hide{display:none!important;}
+.m-nav{padding-top:10px!important;padding-bottom:10px!important;gap:10px!important;}
+.m-navlinks{gap:8px 16px!important;font-size:11px!important;}
+.m-stack{grid-template-columns:minmax(0,1fr)!important;gap:32px!important;}
+.m-stack0{grid-template-columns:minmax(0,1fr)!important;gap:0!important;}
+.m-stack1{grid-template-columns:minmax(0,1fr)!important;gap:8px!important;}
+.m-cons>div{border-right:0!important;}
+.m-h1{font-size:38px!important;}
+.m-h3{font-size:26px!important;}
+h2{font-size:28px!important;}
+.m-statnum{font-size:30px!important;}
+.m-row{grid-template-columns:minmax(0,1fr) 22px!important;gap:6px 12px!important;padding:16px 4px!important;}
+.m-row>span:first-child{grid-column:1/-1;}
+.m-row>span:nth-child(2)>span:first-child{font-size:18px!important;}
+.m-row>span:nth-child(2)>span:nth-child(2){font-size:15px!important;}
+.m-desc{padding:0 4px 22px!important;}
+.m-form{flex-basis:100%!important;}
+.m-sin{padding:14px 16px!important;font-size:16px!important;}
+.m-sbtn{padding:14px 18px!important;}
+.m-mgrid{grid-template-columns:minmax(0,1fr)!important;}
+.m-fgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:32px 24px!important;}
+.m-fgrid>div:first-child{grid-column:1/-1;}
+.dialog-backdrop{padding:12px!important;}
+.dialog-backdrop .dialog>div{padding-left:18px!important;padding-right:18px!important;}
+}
 </style>
 </helmet>
 
 <div style="background:#ffffff;min-height:100vh">
 
-<nav style="position:sticky;top:0;z-index:60;background:#ffffff;border-bottom:1px solid var(--color-neutral-300);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:13px 40px;flex-wrap:wrap">
+<nav class="m-pad m-nav" style="position:sticky;top:0;z-index:60;background:#ffffff;border-bottom:1px solid var(--color-neutral-300);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:13px 40px;flex-wrap:wrap">
   <a href="#top" style="display:flex;align-items:center;gap:14px;text-decoration:none">
     <img src="assets/MAGIC.png" alt="MAGIC" style="height:33px;width:auto;display:block">
-    <span style="font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:.01em;color:var(--color-accent-2);border-left:1px solid var(--color-neutral-200);padding-left:14px">Ideas worth stealing from people worth knowing.</span>
+    <span class="m-hide" style="font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:.01em;color:var(--color-accent-2);border-left:1px solid var(--color-neutral-200);padding-left:14px">Ideas worth stealing from people worth knowing.</span>
   </a>
-  <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;font-family:var(--font-heading);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">
+  <div class="m-navlinks" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;font-family:var(--font-heading);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">
     <a href="#calendar" style="color:var(--color-text);text-decoration:none" style-hover="color:var(--color-accent)">Calendar</a>
     <a href="#recordings" style="color:var(--color-text);text-decoration:none" style-hover="color:var(--color-accent)">Recordings</a>
     <a href="#directory" style="color:var(--color-text);text-decoration:none" style-hover="color:var(--color-accent)">Directory</a>
@@ -69,21 +103,36 @@ input,select{font-family:var(--font-body);}
   </div>
 </nav>
 
-<header id="top" style="max-width:1280px;margin:0 auto;padding:76px 40px 0">
-  <div style="display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:56px;align-items:start">
+<header id="top" class="m-pad m-top" style="max-width:1280px;margin:0 auto;padding:76px 40px 0">
+  <div style="font-family:var(--font-heading);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-accent);margin-bottom:26px">Together since spring 2020 · Invitation only</div>
+  <div class="m-stack" style="display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:56px;align-items:start">
     <div>
-      <div style="font-family:var(--font-heading);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-accent);margin-bottom:26px">Together since spring 2020 · Invitation only</div>
-      <h1 style="font-family:var(--font-heading);color:#000000;font-size:62px;font-weight:700;line-height:1.02;letter-spacing:-.022em;margin:0 0 26px;max-width:16ch;text-wrap:balance">A thought leadership community of accomplished business leaders.</h1>
-      <p style="font-size:19px;line-height:1.55;max-width:52ch;margin:0 0 34px;color:var(--color-accent-2-700);text-wrap:pretty">Roughly 100 caring colleagues learning and growing together. Sharing new ideas, methods, and experiences in marketing, AI, business strategy, and personal development, as well as occasional community discussions with breakout sessions to deepen our connections.</p>
+      <h1 class="m-h1" style="font-family:var(--font-heading);color:#000000;font-size:62px;font-weight:700;line-height:1.02;letter-spacing:-.022em;margin:0 0 26px;max-width:16ch;text-wrap:balance">A thought leadership community of accomplished business leaders.</h1>
+      <p style="font-size:19px;line-height:1.55;max-width:52ch;margin:0 0 34px;color:var(--color-accent-2-700);text-wrap:pretty">A coterie of 100+ caring colleagues learning and growing together. Sharing new ideas, methods, and experiences in marketing, AI, business strategy, and personal development, as well as occasional community discussions with breakout sessions to deepen our connections.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <a class="btn btn-ghost" href="#directory" style="text-decoration:none">Member directory</a>
         <a class="btn btn-secondary" href="https://www.linkedin.com/groups/14198946" target="_blank" rel="noopener" style="text-decoration:none">Private LinkedIn group ↗</a>
       </div>
+    <div style="display:flex;justify-content:space-between;gap:24px;margin-top:44px;width:min(100%,615px)">
+      <div style="padding:0">
+        <div style="font-family:var(--font-heading);color:#000000;font-size:40px;font-weight:700;line-height:1" class="m-statnum">~100</div>
+        <div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-2);margin-top:6px">Members</div>
+      </div>
+      <div style="padding:0">
+        <div style="font-family:var(--font-heading);color:#000000;font-size:40px;font-weight:700;line-height:1" class="m-statnum">{{ sessionCount }}</div>
+        <div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-2);margin-top:6px">Sessions held</div>
+      </div>
+      <div style="padding:0">
+        <div style="font-family:var(--font-heading);color:#000000;font-size:40px;font-weight:700;line-height:1" class="m-statnum">6</div>
+        <div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-2);margin-top:6px">Years running</div>
+      </div>
     </div>
+  
+      </div>
     <div style="display:flex;flex-direction:column;gap:22px">
     <div style="border:1px solid var(--color-neutral-300)">
       <div style="padding:26px 26px 24px">
-        <div style="font-family:var(--font-heading);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--color-accent);margin-bottom:16px">Weekly 1-hour Sessions</div>
+        <div style="font-family:var(--font-heading);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--color-accent);margin-bottom:16px">1-hour Sessions</div>
         <div style="font-family:var(--font-heading);color:#000000;font-size:38px;font-weight:700;line-height:1;margin-bottom:14px">Every Friday</div>
         <div style="display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.6;color:var(--color-accent-2-700)">
           <div><strong style="font-weight:700;color:var(--color-text)">10 AM</strong> Pacific</div>
@@ -102,33 +151,15 @@ input,select{font-family:var(--font-body);}
     </div>
     </div>
   </div>
-
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--color-neutral-300);border-bottom:1px solid var(--color-neutral-300);margin-top:64px">
-    <div style="padding:26px 24px 26px 0;border-right:1px solid var(--color-neutral-200)">
-      <div style="font-family:var(--font-heading);color:#000000;font-size:40px;font-weight:700;line-height:1">~100</div>
-      <div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-2);margin-top:6px">Members</div>
-    </div>
-    <div style="padding:26px 24px;border-right:1px solid var(--color-neutral-200)">
-      <div style="font-family:var(--font-heading);color:#000000;font-size:40px;font-weight:700;line-height:1">{{ sessionCount }}</div>
-      <div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-2);margin-top:6px">Sessions held</div>
-    </div>
-    <div style="padding:26px 0 26px 24px">
-      <div style="font-family:var(--font-heading);color:#000000;font-size:40px;font-weight:700;line-height:1">6</div>
-      <div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-2);margin-top:6px">Years running</div>
-    </div>
-  </div>
-
-  <p style="font-size:15px;line-height:1.7;color:var(--color-accent-2-700);max-width:96ch;margin:26px 0 0">We bring collective experience from Accenture, Amazon, Blue Cross, Chevron, Citibank, Deloitte, Dow Chemical, E&amp;Y, Expedia, Google, IBM, Intel, Johnson &amp; Johnson, Lending Club, LexisNexis, Microsoft, P&amp;G, Siemens and T-Mobile — alongside myriad smaller companies and nonprofits.</p>
 </header>
 
-<section id="calendar" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
+<section id="calendar" class="m-pad m-sec" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px">
     <h2 style="font-family:var(--font-heading);font-size:34px;font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Session Calendar</h2>
-    <div style="font-size:14px;color:var(--color-accent-2)">Upcoming Fridays, 1 pm ET</div>
   </div>
 
   <sc-if value="{{ hasNext }}" hint-placeholder-val="{{ true }}">
-    <article style="border:1px solid var(--color-neutral-300);display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);margin-bottom:34px">
+    <article class="m-stack0" style="border:1px solid var(--color-neutral-300);display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);margin-bottom:34px">
       <div style="background:var(--color-accent);color:#ffffff;padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between">
         <div style="font-family:var(--font-heading);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Next session</div>
         <div>
@@ -139,7 +170,7 @@ input,select{font-family:var(--font-body);}
       </div>
       <div style="padding:30px 30px 26px">
         <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-2);margin-bottom:12px">{{ next.th }}</div>
-        <h3 style="font-family:var(--font-heading);color:#000000;font-size:32px;font-weight:700;line-height:1.14;margin:0 0 14px;letter-spacing:-.01em;text-wrap:pretty">{{ next.t }}</h3>
+        <h3 class="m-h3" style="font-family:var(--font-heading);color:#000000;font-size:32px;font-weight:700;line-height:1.14;margin:0 0 14px;letter-spacing:-.01em;text-wrap:pretty">{{ next.t }}</h3>
         <p style="font-size:15px;line-height:1.65;color:var(--color-accent-2-700);margin:0 0 22px;max-width:78ch">{{ next.blurb }}</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <a class="btn btn-primary" href="https://zoom.us/j/4065516269#success" target="_blank" rel="noopener" style="text-decoration:none">Join on Zoom</a>
@@ -151,7 +182,7 @@ input,select{font-family:var(--font-body);}
   <div style="border-top:1px solid var(--color-neutral-300)">
     <sc-for list="{{ upcoming }}" as="s" hint-placeholder-count="6">
       <div style="border-bottom:1px solid var(--color-neutral-300)">
-        <button type="button" onClick="{{ s.toggle }}" style="text-align:left;background:#ffffff;border:0;padding:20px 20px 20px 4px;cursor:pointer;font-family:var(--font-body);display:grid;grid-template-columns:150px minmax(0,1fr) 26px;gap:26px;align-items:baseline;width:100%" style-hover="background:var(--color-accent-100)">
+        <button type="button" class="m-row" onClick="{{ s.toggle }}" style="text-align:left;background:#ffffff;border:0;padding:20px 20px 20px 4px;cursor:pointer;font-family:var(--font-body);display:grid;grid-template-columns:150px minmax(0,1fr) 26px;gap:26px;align-items:baseline;width:100%" style-hover="background:var(--color-accent-100)">
           <span style="font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:.02em;color:var(--color-accent-2)">{{ s.short }}</span>
           <span>
             <span style="display:block;font-family:var(--font-heading);font-size:22px;font-weight:700;line-height:1.25;color:#000000;text-wrap:pretty">{{ s.t }}</span>
@@ -162,7 +193,7 @@ input,select{font-family:var(--font-body);}
           <span style="font-family:var(--font-heading);font-size:20px;line-height:1;color:var(--color-accent);text-align:right">{{ s.sign }}</span>
         </button>
         <sc-if value="{{ s.isOpen }}" hint-placeholder-val="{{ false }}">
-          <div style="padding:0 20px 26px 180px">
+          <div class="m-desc" style="padding:0 20px 26px 180px">
             <div>
               <p style="font-size:15px;line-height:1.7;color:var(--color-accent-2-700);margin:0 0 18px;max-width:76ch;white-space:pre-wrap">{{ s.blurb }}</p>
               <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -177,15 +208,15 @@ input,select{font-family:var(--font-body);}
 
 </section>
 
-<section id="recordings" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
+<section id="recordings" class="m-pad m-sec" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px">
     <h2 style="font-family:var(--font-heading);font-size:34px;font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Session Recordings</h2>
     <div style="font-size:14px;color:var(--color-accent-2)">Members only · hosted on the MAGIC Drive</div>
   </div>
   <div style="display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
-  <form onSubmit="{{ stopSubmit }}" style="flex:1 1 520px;display:flex;align-items:center;gap:0;border:2px solid var(--color-accent);border-radius:999px;overflow:hidden;background:#ffffff;max-width:660px">
-    <input type="search" placeholder="Search the recording archive by topic, speaker or theme…" value="{{ recQ }}" onChange="{{ onRecQ }}" style="flex:1 1 auto;min-width:0;border:0;outline:none;background:transparent;padding:18px 26px;font-size:17px;font-family:var(--font-body);color:var(--color-text)">
-    <button type="submit" style="flex:0 0 auto;border:0;background:var(--color-accent);color:#ffffff;font-family:var(--font-heading);font-size:15px;font-weight:700;letter-spacing:.06em;padding:18px 34px;cursor:pointer;border-radius:0" style-hover="background:var(--color-accent-600)">Search</button>
+  <form class="m-form" onSubmit="{{ stopSubmit }}" style="flex:1 1 520px;display:flex;align-items:center;gap:0;border:2px solid var(--color-accent);border-radius:999px;overflow:hidden;background:#ffffff;max-width:660px">
+    <input class="m-sin" type="search" placeholder="Search the recording archive by topic, speaker or theme…" value="{{ recQ }}" onChange="{{ onRecQ }}" style="flex:1 1 auto;min-width:0;border:0;outline:none;background:transparent;padding:18px 26px;font-size:17px;font-family:var(--font-body);color:var(--color-text)">
+    <button type="submit" class="m-sbtn" style="flex:0 0 auto;border:0;background:var(--color-accent);color:#ffffff;font-family:var(--font-heading);font-size:15px;font-weight:700;letter-spacing:.06em;padding:18px 34px;cursor:pointer;border-radius:0" style-hover="background:var(--color-accent-600)">Search</button>
   </form>
     <div style="flex:0 1 auto;display:flex;gap:28px;flex-wrap:wrap;font-family:var(--font-heading);font-size:17px;font-weight:600">
       <a href="https://drive.google.com/drive/folders/12GYqnhpjocvP1tL6g60mwy8q-XZDDaCs" target="_blank" rel="noopener">Full recording library ↗</a>
@@ -202,7 +233,7 @@ input,select{font-family:var(--font-body);}
     <div style="border-top:1px solid var(--color-neutral-300)">
       <sc-for list="{{ recList }}" as="r" hint-placeholder-count="10">
         <div style="border-bottom:1px solid var(--color-neutral-300)">
-          <button type="button" onClick="{{ r.toggle }}" style="width:100%;text-align:left;display:grid;grid-template-columns:150px minmax(0,1fr) 26px;gap:26px;align-items:baseline;padding:20px 20px 20px 4px;background:#ffffff;border:0;cursor:pointer;font-family:var(--font-body)" style-hover="background:var(--color-accent-100)">
+          <button type="button" class="m-row" onClick="{{ r.toggle }}" style="width:100%;text-align:left;display:grid;grid-template-columns:150px minmax(0,1fr) 26px;gap:26px;align-items:baseline;padding:20px 20px 20px 4px;background:#ffffff;border:0;cursor:pointer;font-family:var(--font-body)" style-hover="background:var(--color-accent-100)">
             <span style="font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:.02em;color:var(--color-accent-2)">{{ r.short }}</span>
             <span>
               <span style="display:block;font-family:var(--font-heading);font-size:22px;font-weight:700;line-height:1.25;color:#000000;text-wrap:pretty">{{ r.t }}</span>
@@ -213,7 +244,7 @@ input,select{font-family:var(--font-body);}
             <span style="font-family:var(--font-heading);font-size:20px;line-height:1;color:var(--color-accent);text-align:right">{{ r.sign }}</span>
           </button>
           <sc-if value="{{ r.isOpen }}" hint-placeholder-val="{{ false }}">
-            <div style="padding:0 20px 26px 180px">
+            <div class="m-desc" style="padding:0 20px 26px 180px">
               <p style="font-size:15px;line-height:1.7;color:var(--color-accent-2-700);margin:0 0 18px;max-width:76ch;white-space:pre-wrap">{{ r.blurb }}</p>
               <div style="display:flex;gap:12px;flex-wrap:wrap">
                 <a class="btn btn-primary" href="{{ r.primaryHref }}" target="_blank" rel="noopener" style="text-decoration:none">{{ r.primaryLabel }}</a>
@@ -235,7 +266,7 @@ input,select{font-family:var(--font-body);}
   </div>
 </section>
 
-<section id="directory" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
+<section id="directory" class="m-pad m-sec" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:34px">
     <h2 style="font-family:var(--font-heading);font-size:34px;font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Member Directory</h2>
     <div style="font-size:14px;color:var(--color-accent-2)">Search by name, company, city or expertise</div>
@@ -260,7 +291,7 @@ input,select{font-family:var(--font-body);}
       <button type="button" class="{{ allTag.cls }}" onClick="{{ allTag.pick }}" style="cursor:pointer;border-width:1px;border-radius:999px;padding-left:14px;padding-right:14px;font-family:var(--font-body)">{{ allTag.label }}</button>
     </div>
     <sc-for list="{{ tagGroups }}" as="g" hint-placeholder-count="5">
-      <div style="display:grid;grid-template-columns:190px minmax(0,1fr);gap:16px;align-items:baseline;padding-top:6px;border-top:{{ g.rule }}">
+      <div class="m-stack1" style="display:grid;grid-template-columns:190px minmax(0,1fr);gap:16px;align-items:baseline;padding-top:6px;border-top:{{ g.rule }}">
         <div style="font-family:var(--font-heading);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-400);white-space:nowrap">{{ g.name }}</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <sc-for list="{{ g.tags }}" as="t" hint-placeholder-count="4">
@@ -271,9 +302,9 @@ input,select{font-family:var(--font-body);}
     </sc-for>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--color-neutral-300);border-left:1px solid var(--color-neutral-300)">
+  <div class="m-mgrid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--color-neutral-300);border-left:1px solid var(--color-neutral-300)">
     <sc-for list="{{ dirList }}" as="m" hint-placeholder-count="9">
-      <div style="border-right:1px solid var(--color-neutral-300);border-bottom:1px solid var(--color-neutral-300);padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px">
+      <div class="m-card" style="border-right:1px solid var(--color-neutral-300);border-bottom:1px solid var(--color-neutral-300);padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px">
         <div>
           <div style="font-family:var(--font-heading);font-size:20px;font-weight:700;line-height:1.2;color:#000000">{{ m.n }}</div>
           <div style="font-size:13px;color:var(--color-accent-2);margin-top:4px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline">
@@ -316,14 +347,14 @@ input,select{font-family:var(--font-body);}
   </sc-if>
 </section>
 
-<section id="speak" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
+<section id="speak" class="m-pad m-sec" style="max-width:1280px;margin:0 auto;padding:80px 40px 0">
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:44px">
     <h2 style="font-family:var(--font-heading);font-size:34px;font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0;color:var(--color-accent)">Speaking at MAGIC</h2>
   </div>
 
-  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:56px;align-items:start">
+  <div class="m-stack" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:56px;align-items:start">
     <div>
-      <h3 style="font-family:var(--font-heading);color:#000000;font-size:38px;font-weight:700;line-height:1.08;letter-spacing:-.015em;margin:0 0 20px;max-width:18ch">Sharing your expertise is a gift to the community.</h3>
+      <h3 class="m-h3" style="font-family:var(--font-heading);color:#000000;font-size:38px;font-weight:700;line-height:1.08;letter-spacing:-.015em;margin:0 0 20px;max-width:18ch">Sharing your expertise is a gift to the community.</h3>
       <p style="font-size:16px;line-height:1.65;color:var(--color-accent-2-700);margin:0 0 16px;max-width:52ch">We are a community of experienced professionals. We believe that we get by giving — it is our focus and our primary activity. Many members report that they have benefited from referrals or resources from others.</p>
       <p style="font-size:16px;line-height:1.65;color:var(--color-accent-2-700);margin:0 0 28px;max-width:52ch">MAGIC is not a "networking" group. As a result, making a pitch is counterproductive and will diminish your own MAGIC. We think of you more highly than that.</p>
       <a class="btn btn-primary" href="mailto:ll@connectedcom.com?cc=howard@redroostergroup.com&amp;subject=MAGIC%20speaker%20request&amp;body=Hi%20Leslie%20and%20Howard%2C%0A%0AI%27d%20like%20to%20share%20at%20a%20Friday%20MAGIC%20session.%0A%0ATopic%3A%0AWhat%20the%20audience%20will%20gain%3A%0AShort%20bio%20(1-2%20sentences)%3A%0ALinks%20(LinkedIn%2C%20site%2C%20book)%3A%0APreferred%20dates%3A%0A%0AThank%20you%2C%0A" style="text-decoration:none">Request a speaking date</a>
@@ -331,7 +362,7 @@ input,select{font-family:var(--font-body);}
     <div>
       <div style="border:1px solid var(--color-neutral-300);margin-bottom:26px">
         <div style="padding:20px 24px;border-bottom:1px solid var(--color-neutral-300);font-family:var(--font-heading);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Considerations</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr">
+        <div class="m-stack0 m-cons" style="display:grid;grid-template-columns:1fr 1fr">
           <div style="padding:20px 24px;border-right:1px solid var(--color-neutral-200);border-bottom:1px solid var(--color-neutral-200)">
             <div style="font-family:var(--font-heading);font-size:15px;font-weight:700;margin-bottom:6px">Not a pitch</div>
             <div style="font-size:14px;line-height:1.5;color:var(--color-accent-2-700)">The group is a community, not a sales opportunity.</div>
@@ -375,7 +406,7 @@ input,select{font-family:var(--font-body);}
 </section>
 
 <section id="exchange" style="margin-top:88px;border-top:1px solid var(--color-neutral-300);border-bottom:1px solid var(--color-neutral-300);background:var(--color-surface)">
-  <div style="max-width:1280px;margin:0 auto;padding:64px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center">
+  <div class="m-pad m-stack" style="max-width:1280px;margin:0 auto;padding:64px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center">
     <div style="max-width:50ch;font-size:17px">
       <img src="assets/MAGIC-Exchange-Header.png" alt="MAGIC Exchange — Questions asked. And answered." style="width:100%;max-width:353px;height:auto;display:block;margin:0 auto 26px">
       <p style="font-size:17px;line-height:1.6;color:var(--color-accent-2-700);margin:0;max-width:50ch;text-wrap:pretty">Need a recommendation, an introduction, a vendor, a second opinion? Send your question to the Exchange and it goes out to the whole community by email. Answers come back from people who have actually done it.</p>
@@ -390,7 +421,7 @@ input,select{font-family:var(--font-body);}
 </section>
 
 <footer style="margin-top:0;border-top:1px solid var(--color-neutral-300);background:var(--color-text);color:#ffffff">
-  <div style="max-width:1280px;margin:0 auto;padding:56px 40px 44px;display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:40px">
+  <div class="m-pad m-fgrid" style="max-width:1280px;margin:0 auto;padding:56px 40px 44px;display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:40px">
     <div>
       <img src="assets/MAGIC-white.png" alt="MAGIC" style="height:34px;width:auto;display:block;margin-bottom:18px">
       <p style="font-size:14px;line-height:1.6;color:var(--color-neutral-400);margin:0;max-width:34ch">An invitation-only thought leadership community. One hour every Friday, 1 pm ET.</p>
@@ -423,7 +454,7 @@ input,select{font-family:var(--font-body);}
     </div>
   </div>
   <div style="border-top:1px solid var(--color-accent-2-700)">
-    <div style="max-width:1280px;margin:0 auto;padding:20px 40px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--color-neutral-400)">
+    <div class="m-pad" style="max-width:1280px;margin:0 auto;padding:20px 40px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--color-neutral-400)">
       <span>MAGIC · Email and website design and management handled by Howard Levy at Red Rooster Group</span>
       <span>howard@redroostergroup.com</span>
     </div>
