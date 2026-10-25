@@ -491,16 +491,13 @@ h2{font-size:28px!important;}
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;sheetId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;1C3NdRQGRhI-fOIzWBziH2FMI1_WHvB6T0EaaoRCB6-A&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Google Sheet&quot;},&quot;openPastByDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Calendar&quot;},&quot;upcomingCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:6,&quot;min&quot;:3,&quot;max&quot;:12,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Calendar&quot;},&quot;showMemberEmails&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Directory&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;openPastByDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Calendar&quot;},&quot;upcomingCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:6,&quot;min&quot;:3,&quot;max&quot;:12,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Calendar&quot;},&quot;showMemberEmails&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Directory&quot;}}">
 const RECORDINGS = "https://drive.google.com/drive/folders/12GYqnhpjocvP1tL6g60mwy8q-XZDDaCs";
 const DECKS = "https://drive.google.com/drive/folders/1koftYkJy3Ox22sl-X1beSH7X9yNMyTaw";
 
 // ——— Google Sheet loading ———————————————————————————————————————
 // Tabs are addressed by their permanent gid, so renaming a tab can't break the site.
 // Sharing must be "Anyone with the link — Viewer".
-const CSV = (id, gid) =>
-  "https://docs.google.com/spreadsheets/d/" + id +
-  "/gviz/tq?tqx=out:csv&headers=0&gid=" + gid + "&_=" + Date.now();
 
 function parseCSV(text) {
   const rows = []; let row = [], cell = "", q = false;
@@ -520,9 +517,6 @@ function parseCSV(text) {
 
 const norm = s => (s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
 
-const SHEET_ID = "1C3NdRQGRhI-fOIzWBziH2FMI1_WHvB6T0EaaoRCB6-A";
-const SESSION_TAB = { gid: "885042571", name: "Approved Calendar" };
-const MEMBER_TAB = { gid: "964518453", name: "Member Profiles" };
 // Member directory switch. false = section, nav links and member data load are all off. Set true to restore.
 const SHOW_DIRECTORY = false;
 
@@ -567,7 +561,7 @@ function header(rows, ...must) {
 }
 const cell = (r, i) => (i >= 0 && r[i] != null ? String(r[i]).trim() : "");
 
-// Accepts 2026-08-14, 8/14/2026, "August 14, 2026" and gviz's Date(2026,7,14)
+// Accepts 2026-08-14, 8/14/2026, "August 14, 2026" and Date(2026,7,14)
 const p2 = n => String(n).padStart(2, "0");
 function toISO(v) {
   if (!v) return "";
@@ -724,27 +718,16 @@ class Component extends DCLogic {
   }
 
   async loadSheet() {
-    const raw = (this.props.sheetId || SHEET_ID).trim();
-    const id = (raw.match(/\/d\/([a-zA-Z0-9-_]+)/) || [null, raw])[1];
-    const grab = async tab => {
-      try {
-        const r = await fetch(CSV(id, tab.gid), { cache: "no-store" });
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        return (await r.text()).replace(/MAGiC/g, "MAGIC");
-      } catch (e) {
-        console.warn("MAGIC sheet \u2014 the \u201c" + tab.name + "\u201d tab did not load:", e.message);
-        return null;
-      }
-    };
-    const [sText, mText] = await Promise.all([grab(SESSION_TAB), (SHOW_DIRECTORY ? grab(MEMBER_TAB) : null)]);
+    let sText = null;
+    try {
+      const r = await fetch("/api/calendar", { cache: "no-store" });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      sText = (await r.text()).replace(/MAGiC/g, "MAGIC");
+    } catch (e) { console.warn("MAGIC calendar did not load:", e.message); }
     const patch = {};
     if (sText) {
       const list = sessionsFrom(sText);
       if (list.length) { const bak = new Map(SESSIONS.map(s => [s.d, s])); patch.sessions = list.map(s => ({ ...s, rec: s.rec || (bak.get(s.d) || {}).rec || "", deck: s.deck || (bak.get(s.d) || {}).deck || "" })); }
-    }
-    if (mText) {
-      const list = membersFrom(mText);
-      if (list.length) patch.members = list;
     }
     if (Object.keys(patch).length) this.setState(patch);
   }
