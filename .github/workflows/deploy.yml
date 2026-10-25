@@ -24,7 +24,7 @@ jobs:
           rsync -a ./ dist/ \
             --exclude '.git' --exclude '.github' --exclude 'dist' \
             --exclude '*.dc.html' --exclude 'magic-data.js' \
-            --exclude 'uploads' --exclude '*.txt' --exclude 'github.md' \
+            --exclude 'functions' --exclude 'uploads' --exclude '*.txt' --exclude 'github.md' \
             --exclude 'README*' --exclude 'CNAME'
 
       - name: Create Pages project if it doesn't exist yet
