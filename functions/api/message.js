@@ -38,9 +38,9 @@ export async function onRequestPost({ request, env }) {
   const total = +((cnt.headers.get("content-range") || "").split("/")[1] || 0);
   if (total >= DAILY_LIMIT) return json({ error: "Daily message limit reached. Try again tomorrow." }, 429);
 
-  const html = '<p style="white-space:pre-wrap;font-family:sans-serif;font-size:15px;line-height:1.55">' + esc(message) + '</p><hr style="border:0;border-top:1px solid #ddd"><p style="font-family:sans-serif;font-size:12px;color:#777">Sent by ' + esc(fromName) + ' via the MAGIC member directory. Reply to this email to respond to them directly.</p>';
+  const html = '<p style="white-space:pre-wrap;font-family:sans-serif;font-size:15px;line-height:1.55">' + esc(message) + '</p><hr style="border:0;border-top:1px solid #ddd"><p style="font-family:sans-serif;font-size:12px;color:#777">Sent by ' + esc(fromName) + ' (' + esc(fromEmail) + ') via the MAGIC member directory. Reply to this email to respond to them directly.</p>';
   const send = await fetch("https://api.resend.com/emails", { method: "POST", headers: { Authorization: "Bearer " + R, "Content-Type": "application/json" },
-    body: JSON.stringify({ from: FROM, to: [rcpt.email], reply_to: fromName.replace(/[<>"]/g, "") + " <" + fromEmail + ">", subject: "[MAGIC] " + subject, html, text: message + "\n\n—\nSent by " + fromName + " via the MAGIC member directory. Reply to respond to them directly." }) });
+    body: JSON.stringify({ from: '"' + fromName.replace(/[<>"]/g, "") + ' via MAGIC" <connect@magiccommunity.org>', to: [rcpt.email], reply_to: fromName.replace(/[<>"]/g, "") + " <" + fromEmail + ">", subject: "[MAGIC] " + subject, html, text: message + "\n\n—\nSent by " + fromName + " (" + fromEmail + ") via the MAGIC member directory. Reply to respond to them directly." }) });
   if (!send.ok) return json({ error: "Email could not be sent. Try again later." }, 502);
 
   await sb("/rest/v1/message_log", { method: "POST", body: JSON.stringify({ sender_id: user.id, recipient_id: toId }) });
