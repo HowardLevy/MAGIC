@@ -564,6 +564,7 @@ const SB_URL = "https://lgvpnzwmesjwhsdywezn.supabase.co";
 const SB_KEY = "sb_publishable_uheab0tHc8GTzy5-xDSSWw_GiNCS71i";
 const ALL_TAGS = TAG_GROUPS_FLAT();
 function TAG_GROUPS_FLAT() { return ["B2B","B2C","Sales","Nonprofit","Strategy Consulting","Fractional CMO","Coaching & Careers","Research & Insights","Content","Demand Gen","PR & Comms.","Brand Strategy","Design & Creative","Social & Community","Marketing Ops","AI"]; }
+const fixUrl = u => { u = (u || "").trim(); return !u || /^(https?:|mailto:)/i.test(u) ? u : "https://" + u.replace(/^\/+/, ""); };
 const EMPTY_FORM = { full_name: "", title: "", company: "", location: "", website: "", linkedin: "", bio: "", is_public: false, expertise: [] };
 
 // The expertise columns of "Member Profiles", grouped as the sheet groups them.
@@ -789,7 +790,7 @@ class Component extends DCLogic {
       this.setState({ form: { full_name: d.full_name || "", title: d.title || "", company: d.company || "", location: d.location || "", website: d.website || "", linkedin: d.linkedin || "", bio: d.bio || "", is_public: !!d.is_public, expertise: d.expertise || [] } });
     }
     const all = await sb.from("profiles").select("*").eq("is_public", true).order("full_name");
-    if (all.data) this.setState({ members: all.data.map(d => ({ n: d.full_name || "Member", co: d.company || "", s: d.bio || "", city: [d.title, d.location].filter(Boolean).join(" · "), st: "", w: d.website || "", li: d.linkedin || "", e: "", tags: d.expertise || [] })) });
+    if (all.data) this.setState({ members: all.data.map(d => ({ n: d.full_name || "Member", co: d.company || "", s: d.bio || "", city: [d.title, d.location].filter(Boolean).join(" · "), st: "", w: fixUrl(d.website), li: fixUrl(d.linkedin), e: "", tags: d.expertise || [] })) });
   }
 
   sendLink = async e => {
@@ -805,7 +806,8 @@ class Component extends DCLogic {
     const S = this.state;
     if (!this.sb || !S.session) return;
     this.setState({ saving: true, authMsg: "" });
-    const f = S.form;
+    const f = { ...S.form, website: fixUrl(S.form.website), linkedin: fixUrl(S.form.linkedin) };
+    this.setState({ form: f });
     const { error } = await this.sb.from("profiles").update({ ...f, updated_at: new Date().toISOString() }).eq("id", S.session.user.id);
     this.setState({ saving: false, authMsg: error ? "Could not save: " + error.message : "Saved." });
     if (!error) this.loadMine();
