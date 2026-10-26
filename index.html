@@ -15,6 +15,7 @@
 <helmet>
 <link rel="stylesheet" href="_ds/modernist-8eb470ef-e3e1-474d-86e8-efc227468431/styles.css">
 <script src="_ds/modernist-8eb470ef-e3e1-474d-86e8-efc227468431/_ds_bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
   --color-bg:#ffffff;
@@ -100,6 +101,7 @@ h2{font-size:28px!important;}
     <sc-if value="{{ showDirectory }}" hint-placeholder-val="{{ false }}"><a href="#directory" style="color:var(--color-text);text-decoration:none" style-hover="color:var(--color-accent)">Directory</a></sc-if>
     <a href="#speak" style="color:var(--color-text);text-decoration:none" style-hover="color:var(--color-accent)">Speak</a>
     <a href="#exchange" style="color:var(--color-text);text-decoration:none" style-hover="color:var(--color-accent)">Exchange</a>
+    <button type="button" class="btn btn-ghost" onClick="{{ openAuth }}" style="font-family:var(--font-heading);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">{{ authLabel }}</button>
     <a class="btn btn-primary" href="https://zoom.us/j/4065516269#success" target="_blank" rel="noopener" style="text-decoration:none">Join Friday's Zoom</a>
   </div>
 </nav>
@@ -141,7 +143,7 @@ h2{font-size:28px!important;}
           <div><strong style="font-weight:700;color:var(--color-text)">12 PM</strong> Central</div>
           <div><strong style="font-weight:700;color:var(--color-text)">1 PM</strong> Eastern</div>
         </div>
-        <a class="btn btn-primary" href="https://zoom.us/j/4065516269#success" target="_blank" rel="noopener" style="text-decoration:none;margin-top:20px">Join the meeting</a>
+    <a class="btn btn-primary" href="https://zoom.us/j/4065516269#success" target="_blank" rel="noopener" style="text-decoration:none;margin-top:20px">Join the meeting</a>
       </div>
     </div>
 
@@ -176,7 +178,7 @@ h2{font-size:28px!important;}
         <h3 class="m-h3" style="font-family:var(--font-heading);color:#000000;font-size:32px;font-weight:700;line-height:1.14;margin:0 0 14px;letter-spacing:-.01em;text-wrap:pretty">{{ next.t }}</h3>
         <p style="font-size:15px;line-height:1.65;color:var(--color-accent-2-700);margin:0 0 22px;max-width:78ch">{{ next.blurb }}</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <a class="btn btn-primary" href="https://zoom.us/j/4065516269#success" target="_blank" rel="noopener" style="text-decoration:none">Join on Zoom</a>
+    <a class="btn btn-primary" href="https://zoom.us/j/4065516269#success" target="_blank" rel="noopener" style="text-decoration:none">Join on Zoom</a>
         </div>
       </div>
     </article>
@@ -278,12 +280,6 @@ h2{font-size:28px!important;}
 
   <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
     <input class="input" type="search" placeholder="Search members…" value="{{ q }}" onChange="{{ onQ }}" style="flex:1 1 320px;min-width:220px">
-    <select class="input" value="{{ st }}" onChange="{{ onState }}" style="flex:0 1 150px;min-width:130px;font-family:var(--font-body)">
-      <option value="">All states</option>
-      <sc-for list="{{ states }}" as="o" hint-placeholder-count="6">
-        <option value="{{ o.v }}">{{ o.label }}</option>
-      </sc-for>
-    </select>
     <span style="font-size:13px;color:var(--color-accent-2);white-space:nowrap">{{ dirCount }}</span>
     <sc-if value="{{ hasFilters }}" hint-placeholder-val="{{ true }}">
       <button class="btn btn-ghost" type="button" onClick="{{ clearFilters }}">Clear filters</button>
@@ -489,6 +485,51 @@ h2{font-size:28px!important;}
   </div>
 </sc-if>
 
+<sc-if value="{{ authOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeAuth }}" style="position:fixed;inset:0;z-index:100;background:rgba(32,30,29,.55);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto">
+  <div onClick="{{ stop }}" style="background:#ffffff;border-top:2px solid var(--color-accent);width:100%;max-width:560px;padding:32px;display:grid;gap:18px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+      <h2 style="font-family:var(--font-heading);font-size:28px;font-weight:700;letter-spacing:-.015em;margin:0;color:var(--color-accent)">{{ authTitle }}</h2>
+      <button type="button" class="btn btn-ghost" onClick="{{ closeAuth }}">Close</button>
+    </div>
+
+    <sc-if value="{{ signedOut }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ sendLink }}" style="display:grid;gap:14px">
+        <p style="margin:0;font-size:15px;line-height:1.55;color:var(--color-accent-2-700)">MAGIC is invite-only. Enter the email you were invited with and we'll send a one-time sign-in link. No password needed.</p>
+        <input class="input" type="email" required placeholder="you@company.com" value="{{ email }}" onChange="{{ onEmail }}">
+        <button class="btn btn-primary" type="submit">{{ sendLabel }}</button>
+      </form>
+    </sc-if>
+
+    <sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}">
+      <form onSubmit="{{ saveProfile }}" style="display:grid;gap:14px">
+        <div style="font-size:13px;color:var(--color-accent-2)">Signed in as {{ userEmail }}</div>
+        <sc-for list="{{ fields }}" as="f" hint-placeholder-count="6">
+          <div class="field"><label>{{ f.label }}</label><input class="input" type="text" value="{{ f.value }}" onChange="{{ f.on }}"></div>
+        </sc-for>
+        <div class="field"><label>Bio</label><textarea class="input" rows="5" value="{{ bio }}" onChange="{{ onBio }}" style="font-family:var(--font-body);resize:vertical"></textarea></div>
+        <div>
+          <div style="font-family:var(--font-heading);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-400);margin-bottom:8px">Expertise</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ expertiseTags }}" as="t" hint-placeholder-count="10">
+              <button type="button" class="{{ t.cls }}" onClick="{{ t.pick }}" style="cursor:pointer;border-width:1px;border-radius:999px;padding-left:14px;padding-right:14px;font-family:var(--font-body)">{{ t.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <label style="display:flex;gap:10px;align-items:center;font-size:14px;cursor:pointer"><input type="checkbox" checked="{{ isPublic }}" onChange="{{ onPublic }}"> List me in the member directory</label>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn btn-primary" type="submit">{{ saveLabel }}</button>
+          <button class="btn btn-secondary" type="button" onClick="{{ signOut }}">Sign out</button>
+        </div>
+      </form>
+    </sc-if>
+
+    <sc-if value="{{ authMsg }}" hint-placeholder-val="{{ false }}">
+      <div style="font-size:14px;line-height:1.5;padding:12px 14px;border:1px solid var(--color-neutral-300);color:var(--color-accent-2-700)">{{ authMsg }}</div>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;openPastByDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Calendar&quot;},&quot;upcomingCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:6,&quot;min&quot;:3,&quot;max&quot;:12,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Calendar&quot;},&quot;showMemberEmails&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Directory&quot;}}">
@@ -518,7 +559,12 @@ function parseCSV(text) {
 const norm = s => (s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
 
 // Member directory switch. false = section, nav links and member data load are all off. Set true to restore.
-const SHOW_DIRECTORY = false;
+const SHOW_DIRECTORY = true; // directory only renders for signed-in members
+const SB_URL = "https://lgvpnzwmesjwhsdywezn.supabase.co";
+const SB_KEY = "sb_publishable_uheab0tHc8GTzy5-xDSSWw_GiNCS71i";
+const ALL_TAGS = TAG_GROUPS_FLAT();
+function TAG_GROUPS_FLAT() { return ["B2B","B2C","Sales","Nonprofit","Strategy Consulting","Fractional CMO","Coaching & Careers","Research & Insights","Content","Demand Gen","PR & Comms.","Brand Strategy","Design & Creative","Social & Community","Marketing Ops","AI"]; }
+const EMPTY_FORM = { full_name: "", title: "", company: "", location: "", website: "", linkedin: "", bio: "", is_public: false, expertise: [] };
 
 // The expertise columns of "Member Profiles", grouped as the sheet groups them.
 const TAG_GROUPS = [
@@ -708,14 +754,65 @@ class Component extends DCLogic {
     members: [], sessions: [],
     q: "", tag: "All", city: "", st: "", dirN: 12,
     recQ: "", recTh: "All", recN: 9, openId: null,
-    modal: null
+    modal: null,
+    session: null, authOpen: false, email: "", authMsg: "", sending: false, saving: false,
+    form: { ...EMPTY_FORM }
   };
 
   componentDidMount() {
     this.setState({ members: MEMBERS, sessions: SESSIONS, showPast: !!this.props.openPastByDefault });
     document.addEventListener("keydown", this.onKey);
     this.loadSheet();
+    this.initAuth();
   }
+
+  initAuth(tries = 0) {
+    if (!window.supabase) { if (tries < 50) setTimeout(() => this.initAuth(tries + 1), 100); return; }
+    const sb = this.sb = window.supabase.createClient(SB_URL, SB_KEY);
+    sb.auth.onAuthStateChange((ev, session) => {
+      this.setState({ session });
+      if (session) setTimeout(() => this.loadMine(), 0);
+      else this.setState({ members: MEMBERS, form: { ...EMPTY_FORM } });
+      if (ev === "SIGNED_IN" && /access_token|code=/.test(location.hash + location.search)) {
+        history.replaceState(null, "", location.pathname);
+      }
+    });
+  }
+
+  async loadMine() {
+    const sb = this.sb, S = this.state;
+    if (!sb || !S.session) return;
+    const uid = S.session.user.id;
+    const mine = await sb.from("profiles").select("*").eq("id", uid).maybeSingle();
+    if (mine.data) {
+      const d = mine.data;
+      this.setState({ form: { full_name: d.full_name || "", title: d.title || "", company: d.company || "", location: d.location || "", website: d.website || "", linkedin: d.linkedin || "", bio: d.bio || "", is_public: !!d.is_public, expertise: d.expertise || [] } });
+    }
+    const all = await sb.from("profiles").select("*").eq("is_public", true).order("full_name");
+    if (all.data) this.setState({ members: all.data.map(d => ({ n: d.full_name || "Member", co: d.company || "", s: d.bio || "", city: [d.title, d.location].filter(Boolean).join(" · "), st: "", w: d.website || "", li: d.linkedin || "", e: "", tags: d.expertise || [] })) });
+  }
+
+  sendLink = async e => {
+    e.preventDefault();
+    if (!this.sb) return;
+    this.setState({ sending: true, authMsg: "" });
+    const { error } = await this.sb.auth.signInWithOtp({ email: this.state.email.trim(), options: { shouldCreateUser: false, emailRedirectTo: location.origin } });
+    this.setState({ sending: false, authMsg: error && !/not allowed|signups|not found/i.test(error.message) ? "Something went wrong: " + error.message : "If that email has been invited, a sign-in link is on its way. Check your inbox." });
+  };
+
+  saveProfile = async e => {
+    e.preventDefault();
+    const S = this.state;
+    if (!this.sb || !S.session) return;
+    this.setState({ saving: true, authMsg: "" });
+    const f = S.form;
+    const { error } = await this.sb.from("profiles").update({ ...f, updated_at: new Date().toISOString() }).eq("id", S.session.user.id);
+    this.setState({ saving: false, authMsg: error ? "Could not save: " + error.message : "Saved." });
+    if (!error) this.loadMine();
+  };
+
+  signOut = async () => { if (this.sb) await this.sb.auth.signOut(); this.setState({ authOpen: false, authMsg: "" }); };
+  setField = (k, v) => this.setState(s => ({ form: { ...s.form, [k]: v } }));
 
   async loadSheet() {
     let sText = null;
@@ -732,7 +829,7 @@ class Component extends DCLogic {
     if (Object.keys(patch).length) this.setState(patch);
   }
   componentWillUnmount() { document.removeEventListener("keydown", this.onKey); }
-  onKey = e => { if (e.key === "Escape") this.setState({ modal: null }); };
+  onKey = e => { if (e.key === "Escape") this.setState({ modal: null, authOpen: false }); };
 
   parse(iso) { const [y, m, d] = iso.split("-").map(Number); return new Date(y, m - 1, d); }
 
@@ -831,7 +928,22 @@ class Component extends DCLogic {
 
     const next = future[0];
     return {
-      showDirectory: SHOW_DIRECTORY,
+      showDirectory: SHOW_DIRECTORY && !!S.session,
+      authOpen: S.authOpen,
+      openAuth: () => this.setState({ authOpen: true, authMsg: "" }),
+      closeAuth: () => this.setState({ authOpen: false }),
+      authLabel: S.session ? "My profile" : "Member login",
+      authTitle: S.session ? "Your profile" : "Member login",
+      signedIn: !!S.session, signedOut: !S.session,
+      userEmail: S.session ? S.session.user.email : "",
+      email: S.email, onEmail: e => this.setState({ email: e.target.value }),
+      sendLink: this.sendLink, sendLabel: S.sending ? "Sending…" : "Email me a sign-in link",
+      saveProfile: this.saveProfile, saveLabel: S.saving ? "Saving…" : "Save profile",
+      signOut: this.signOut, authMsg: S.authMsg,
+      fields: [["Full name","full_name"],["Title","title"],["Company","company"],["Location (city, state)","location"],["Website","website"],["LinkedIn URL","linkedin"]].map(([label, k]) => ({ label, value: S.form[k], on: e => this.setField(k, e.target.value) })),
+      bio: S.form.bio, onBio: e => this.setField("bio", e.target.value),
+      isPublic: S.form.is_public, onPublic: e => this.setField("is_public", e.target.checked),
+      expertiseTags: ALL_TAGS.map(t => { const on = S.form.expertise.includes(t); return { label: t, cls: "tag " + (on ? "tag-accent" : "tag-outline"), pick: () => this.setField("expertise", on ? S.form.expertise.filter(x => x !== t) : [...S.form.expertise, t]) }; }),
       sessionCount: S.sessions.length ? String(S.sessions.filter(s => !s.off && s.d < today).length) : "300",
       hasNext: !!next,
       next: next || {},
