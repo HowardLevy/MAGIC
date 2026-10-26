@@ -26,7 +26,7 @@ export async function onRequestPost({ request, env }) {
     sb("/rest/v1/profiles?select=full_name,email&id=eq." + user.id).then(r => r.json()),
     sb("/rest/v1/profiles?select=full_name,email,allow_messages,is_public&id=eq." + toId).then(r => r.json())
   ]);
-  if (!Array.isArray(me) || !Array.isArray(to)) return json({ error: "Server configuration error: check SUPABASE_SERVICE_KEY." }, 500);
+  if (!Array.isArray(me) || !Array.isArray(to)) { const e = (!Array.isArray(me) ? me : to) || {}; return json({ error: "Server configuration error (" + (e.code || e.hint || "?") + "): " + (e.message || "check SUPABASE_SERVICE_KEY") + " [key starts with " + K.slice(0, 10) + ", length " + K.length + "]" }, 500); }
   const sender = me[0], rcpt = to[0];
   if (!rcpt || !rcpt.allow_messages || !rcpt.is_public) return json({ error: "This member isn't accepting messages." }, 403);
   if (!rcpt.email) return json({ error: "This member has no email on file." }, 500);
