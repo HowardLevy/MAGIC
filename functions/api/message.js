@@ -8,7 +8,8 @@ const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&
 export async function onRequestPost({ request, env }) {
   const { SUPABASE_URL: U, SUPABASE_SERVICE_KEY: K, RESEND_API_KEY: R } = env;
   if (!U || !K || !R) return json({ error: "Messaging is not configured yet." }, 500);
-  const sb = (path, init = {}) => fetch(U + path, { ...init, headers: { apikey: K, Authorization: "Bearer " + K, "Content-Type": "application/json", ...(init.headers || {}) } });
+  const auth = K.startsWith("sb_") ? {} : { Authorization: "Bearer " + K }; // new-style sb_secret keys go in apikey only
+  const sb = (path, init = {}) => fetch(U + path, { ...init, headers: { apikey: K, ...auth, "Content-Type": "application/json", ...(init.headers || {}) } });
 
   const token = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
   if (!token) return json({ error: "Please sign in." }, 401);
@@ -25,8 +26,10 @@ export async function onRequestPost({ request, env }) {
     sb("/rest/v1/profiles?select=full_name,email&id=eq." + user.id).then(r => r.json()),
     sb("/rest/v1/profiles?select=full_name,email,allow_messages,is_public&id=eq." + toId).then(r => r.json())
   ]);
+  if (!Array.isArray(me) || !Array.isArray(to)) return json({ error: "Server configuration error: check SUPABASE_SERVICE_KEY." }, 500);
   const sender = me[0], rcpt = to[0];
-  if (!rcpt || !rcpt.allow_messages || !rcpt.is_public || !rcpt.email) return json({ error: "This member isn't accepting messages." }, 403);
+  if (!rcpt || !rcpt.allow_messages || !rcpt.is_public) return json({ error: "This member isn't accepting messages." }, 403);
+  if (!rcpt.email) return json({ error: "This member has no email on file." }, 500);
   const fromEmail = user.email || (sender && sender.email);
   const fromName = (sender && sender.full_name) || fromEmail;
 
