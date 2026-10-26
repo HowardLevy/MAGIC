@@ -305,6 +305,12 @@ h2{font-size:28px!important;}
   <div class="m-mgrid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--color-neutral-300);border-left:1px solid var(--color-neutral-300)">
     <sc-for list="{{ dirList }}" as="m" hint-placeholder-count="9">
       <div class="m-card" style="border-right:1px solid var(--color-neutral-300);border-bottom:1px solid var(--color-neutral-300);padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px">
+        <sc-if value="{{ m.photo }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ m.photo }}" alt="{{ m.n }}" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;margin-bottom:6px">
+        </sc-if>
+        <sc-if value="{{ m.noPhoto }}" hint-placeholder-val="{{ true }}">
+          <div style="width:100%;aspect-ratio:1/1;background:var(--color-neutral-200);display:flex;align-items:flex-end;padding:16px;box-sizing:border-box;margin-bottom:6px;font-family:var(--font-heading);font-size:56px;font-weight:700;letter-spacing:-.02em;color:var(--color-neutral-400);line-height:1">{{ m.ini }}</div>
+        </sc-if>
         <div>
           <div style="font-family:var(--font-heading);font-size:20px;font-weight:700;line-height:1.2;color:#000000">{{ m.n }}</div>
           <div style="font-size:13px;color:var(--color-accent-2);margin-top:4px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline">
@@ -504,6 +510,14 @@ h2{font-size:28px!important;}
     <sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}">
       <form onSubmit="{{ saveProfile }}" style="display:grid;gap:14px">
         <div style="font-size:13px;color:var(--color-accent-2)">Signed in as {{ userEmail }}</div>
+        <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+          <sc-if value="{{ photo }}" hint-placeholder-val="{{ false }}"><img src="{{ photo }}" alt="Your photo" style="width:88px;height:88px;object-fit:cover;display:block"></sc-if>
+          <sc-if value="{{ noPhoto }}" hint-placeholder-val="{{ true }}"><div style="width:88px;height:88px;background:var(--color-neutral-200);display:flex;align-items:flex-end;padding:8px;box-sizing:border-box;font-family:var(--font-heading);font-size:28px;font-weight:700;color:var(--color-neutral-400);line-height:1">{{ initials }}</div></sc-if>
+          <div style="display:grid;gap:6px">
+            <label class="btn btn-secondary" style="cursor:pointer">{{ photoLabel }}<input type="file" accept="image/*" onChange="{{ onPhoto }}" style="display:none"></label>
+            <span style="font-size:12px;color:var(--color-accent-2)">Optional. Square crop, shown in color.</span>
+          </div>
+        </div>
         <sc-for list="{{ fields }}" as="f" hint-placeholder-count="6">
           <div class="field"><label>{{ f.label }}</label><input class="input" type="text" value="{{ f.value }}" onChange="{{ f.on }}"></div>
         </sc-for>
@@ -565,7 +579,7 @@ const SB_KEY = "sb_publishable_uheab0tHc8GTzy5-xDSSWw_GiNCS71i";
 const ALL_TAGS = TAG_GROUPS_FLAT();
 function TAG_GROUPS_FLAT() { return ["B2B","B2C","Sales","Nonprofit","Strategy Consulting","Fractional CMO","Coaching & Careers","Research & Insights","Content","Demand Gen","PR & Comms.","Brand Strategy","Design & Creative","Social & Community","Marketing Ops","AI"]; }
 const fixUrl = u => { u = (u || "").trim(); return !u || /^(https?:|mailto:)/i.test(u) ? u : "https://" + u.replace(/^\/+/, ""); };
-const EMPTY_FORM = { full_name: "", title: "", company: "", location: "", website: "", linkedin: "", bio: "", is_public: false, expertise: [] };
+const EMPTY_FORM = { full_name: "", title: "", company: "", location: "", website: "", linkedin: "", bio: "", is_public: false, expertise: [], avatar_url: "" };
 
 // The expertise columns of "Member Profiles", grouped as the sheet groups them.
 const TAG_GROUPS = [
@@ -756,7 +770,7 @@ class Component extends DCLogic {
     q: "", tag: "All", city: "", st: "", dirN: 12,
     recQ: "", recTh: "All", recN: 9, openId: null,
     modal: null,
-    session: null, authOpen: false, email: "", authMsg: "", sending: false, saving: false,
+    session: null, authOpen: false, email: "", authMsg: "", sending: false, saving: false, uploading: false,
     form: { ...EMPTY_FORM }
   };
 
@@ -787,10 +801,10 @@ class Component extends DCLogic {
     const mine = await sb.from("profiles").select("*").eq("id", uid).maybeSingle();
     if (mine.data) {
       const d = mine.data;
-      this.setState({ form: { full_name: d.full_name || "", title: d.title || "", company: d.company || "", location: d.location || "", website: d.website || "", linkedin: d.linkedin || "", bio: d.bio || "", is_public: !!d.is_public, expertise: d.expertise || [] } });
+      this.setState({ form: { full_name: d.full_name || "", title: d.title || "", company: d.company || "", location: d.location || "", website: d.website || "", linkedin: d.linkedin || "", bio: d.bio || "", is_public: !!d.is_public, expertise: d.expertise || [], avatar_url: d.avatar_url || "" } });
     }
     const all = await sb.from("profiles").select("*").eq("is_public", true).order("full_name");
-    if (all.data) this.setState({ members: all.data.map(d => ({ n: d.full_name || "Member", co: d.company || "", s: d.bio || "", city: [d.title, d.location].filter(Boolean).join(" · "), st: "", w: fixUrl(d.website), li: fixUrl(d.linkedin), e: "", tags: d.expertise || [] })) });
+    if (all.data) this.setState({ members: all.data.map(d => ({ n: d.full_name || "Member", co: d.company || "", s: d.bio || "", city: [d.title, d.location].filter(Boolean).join(" · "), st: "", w: fixUrl(d.website), li: fixUrl(d.linkedin), e: "", tags: d.expertise || [], photo: d.avatar_url || "" })) });
   }
 
   sendLink = async e => {
@@ -813,6 +827,29 @@ class Component extends DCLogic {
     if (!error) this.loadMine();
   };
 
+  onPhoto = async e => {
+    const file = e.target.files && e.target.files[0], S = this.state;
+    e.target.value = "";
+    if (!file || !this.sb || !S.session) return;
+    this.setState({ uploading: true, authMsg: "" });
+    try {
+      const bmp = await createImageBitmap(file);
+      const side = Math.min(bmp.width, bmp.height), out = Math.min(600, side);
+      const c = document.createElement("canvas"); c.width = c.height = out;
+      c.getContext("2d").drawImage(bmp, (bmp.width - side) / 2, (bmp.height - side) / 2, side, side, 0, 0, out, out);
+      const blob = await new Promise(r => c.toBlob(r, "image/jpeg", 0.85));
+      const path = S.session.user.id + "/avatar.jpg";
+      const up = await this.sb.storage.from("avatars").upload(path, blob, { upsert: true, contentType: "image/jpeg" });
+      if (up.error) throw up.error;
+      const url = this.sb.storage.from("avatars").getPublicUrl(path).data.publicUrl + "?v=" + Date.now();
+      const db = await this.sb.from("profiles").update({ avatar_url: url }).eq("id", S.session.user.id);
+      if (db.error) throw db.error;
+      this.setField("avatar_url", url);
+      this.setState({ authMsg: "Photo updated." });
+      this.loadMine();
+    } catch (err) { this.setState({ authMsg: "Photo upload failed: " + (err.message || err) }); }
+    this.setState({ uploading: false });
+  };
   signOut = async () => { if (this.sb) await this.sb.auth.signOut(); this.setState({ authOpen: false, authMsg: "" }); };
   setField = (k, v) => this.setState(s => ({ form: { ...s.form, [k]: v } }));
 
@@ -832,6 +869,8 @@ class Component extends DCLogic {
   }
   componentWillUnmount() { document.removeEventListener("keydown", this.onKey); }
   onKey = e => { if (e.key === "Escape") this.setState({ modal: null, authOpen: false }); };
+
+  initials(n) { return (n || "").trim().split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join("") || "M"; }
 
   parse(iso) { const [y, m, d] = iso.split("-").map(Number); return new Date(y, m - 1, d); }
 
@@ -910,6 +949,7 @@ class Component extends DCLogic {
       return {
         ...m,
         w, li,
+        photo: m.photo || "", noPhoto: !m.photo, ini: this.initials(m.n),
         co: m.co || "",
         coHref: m.co && w ? w : "",
         coPlain: m.co && !w,
@@ -932,6 +972,9 @@ class Component extends DCLogic {
     return {
       showDirectory: SHOW_DIRECTORY && !!S.session,
       authOpen: S.authOpen,
+      photo: S.form.avatar_url, noPhoto: !S.form.avatar_url,
+      initials: this.initials(S.form.full_name), photoLabel: S.uploading ? "Uploading…" : (S.form.avatar_url ? "Change photo" : "Choose photo"),
+      onPhoto: this.onPhoto,
       openAuth: () => this.setState({ authOpen: true, authMsg: "" }),
       closeAuth: () => this.setState({ authOpen: false }),
       authLabel: S.session ? "My profile" : "Member login",
