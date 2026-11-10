@@ -423,9 +423,16 @@ h2{font-size:28px!important;}
     </div>
     <div style="border:1px solid var(--color-neutral-300);background:#ffffff;padding:32px 32px 30px">
       <h3 style="font-family:var(--font-heading);color:#000000;font-size:28px;font-weight:700;line-height:1.14;margin:0 0 16px">Ask the Group</h3>
-      <p style="font-size:15px;line-height:1.6;color:var(--color-accent-2-700);margin:0 0 24px">Email Howard with your question and any context. He'll send it to the group under the MAGIC Exchange banner. Replies come directly to you.</p>
-      <a class="btn btn-primary" href="mailto:howard@redroostergroup.com?subject=MAGIC%20Exchange%20request&amp;body=Howard%20%E2%80%94%20please%20send%20this%20to%20the%20group%3A%0A%0AMy%20question%3A%0A%0AContext%20that%20will%20help%20people%20answer%3A%0A%0AHow%20to%20reach%20me%3A%0A%0AThanks%2C%0A" style="text-decoration:none">Email your request to the Exchange</a>
-      <div style="font-size:13px;color:var(--color-accent-2);margin-top:14px">Goes to <a href="mailto:howard@redroostergroup.com?subject=MAGIC%20Exchange%20request" style="color:inherit">howard@redroostergroup.com</a></div>
+      <p style="font-size:15px;line-height:1.6;color:var(--color-accent-2-700);margin:0 0 24px">Send Howard your question and any context. He'll share it with the group under the MAGIC Exchange banner. Replies come directly to you.</p>
+      <form onSubmit="{{ exSubmit }}" style="display:grid;gap:14px">
+        <div class="field"><label for="ex-name">Your name</label><input class="input" id="ex-name" name="name" required maxlength="100"></div>
+        <div class="field"><label for="ex-email">Your email</label><input class="input" id="ex-email" name="email" type="email" required maxlength="200"></div>
+        <div class="field"><label for="ex-q">Your question</label><textarea class="input" id="ex-q" name="question" rows="3" required maxlength="1500" style="font-family:inherit"></textarea></div>
+        <div class="field"><label for="ex-c">Context that will help people answer</label><textarea class="input" id="ex-c" name="context" rows="3" maxlength="1500" style="font-family:inherit"></textarea></div>
+        <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0">
+        <button class="btn btn-primary" type="submit">{{ exLabel }}</button>
+        <div style="font-size:14px;line-height:1.5;color:var(--color-accent-2-700)">{{ exStatus }}</div>
+      </form>
     </div>
   </div>
 </section>
@@ -789,6 +796,7 @@ const SESSIONS = [{"d":"2026-09-25","t":"Portrait drawings","th":"","notes":""},
 
 class Component extends DCLogic {
   state = {
+    exStatus: "", exSending: false,
     members: [], sessions: [],
     q: "", tag: "All", city: "", st: "", dirN: 12,
     recQ: "", recTh: "All", recN: 9, openId: null,
@@ -1020,6 +1028,17 @@ class Component extends DCLogic {
       photo: S.form.avatar_url, noPhoto: !S.form.avatar_url,
       initials: this.initials(S.form.full_name), photoLabel: S.uploading ? "Uploading…" : (S.form.avatar_url ? "Change photo" : "Choose photo"),
       onPhoto: this.onPhoto,
+      exStatus: S.exStatus, exLabel: S.exSending ? "Sending…" : "Send to the Exchange",
+      exSubmit: async e => {
+        e.preventDefault(); const f = e.target;
+        this.setState({ exSending: true, exStatus: "" });
+        try {
+          const r = await fetch("/api/exchange", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: f.elements.name.value, email: f.elements.email.value, question: f.elements.question.value, context: f.elements.context.value, website: f.elements.website.value }) });
+          const j = await r.json().catch(() => ({}));
+          if (r.ok) f.reset();
+          this.setState({ exSending: false, exStatus: r.ok ? "Sent. Howard will share it with the group; replies come straight to you." : (j.error || "Could not send. Please try again.") });
+        } catch (err) { this.setState({ exSending: false, exStatus: "Could not send. Please try again." }); }
+      },
       openAuth: () => this.setState({ authOpen: true, authMsg: "" }),
       closeAuth: () => this.setState({ authOpen: false }),
       authLabel: S.session ? "My profile" : "Member login",
