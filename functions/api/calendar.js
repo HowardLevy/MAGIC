@@ -30,7 +30,7 @@ export async function onRequestGet({ env }) {
   let text;
   try {
     const url = "https://docs.google.com/spreadsheets/d/" + encodeURIComponent(env.SHEET_ID) +
-      "/gviz/tq?tqx=out:csv&headers=0&gid=" + encodeURIComponent(env.CALENDAR_GID);
+      "/export?format=csv&gid=" + encodeURIComponent(env.CALENDAR_GID); // export keeps in-cell line breaks; gviz flattens them
     const r = await fetch(url, { cf: { cacheTtl: 60, cacheEverything: true } });
     if (!r.ok) return new Response("Upstream error", { status: 502 });
     text = await r.text();
